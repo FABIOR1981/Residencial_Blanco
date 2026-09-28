@@ -164,8 +164,8 @@ const CONFIG = {
    *                 en la sección "Galería de Actividades")
    * --------------------------------------------------------- */
   cloudinary: {
-    cloudName: '[TU_CLOUD_NAME]',
-    uploadPreset: '[TU_UPLOAD_PRESET]',
+    cloudName: 'p0qlmlor',
+    uploadPreset: 'subir_gestor',
     baseFolder: 'residencial',
     tagGaleria: 'residencial_galeria',
   },
