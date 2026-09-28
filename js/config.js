@@ -11,8 +11,9 @@
  *  2. Reemplazar los textos institucionales (misión, visión,
  *     valores, servicios, perfil de dirección) según corresponda.
  *  3. Configurar los enlaces de contacto (WhatsApp, redes, maps).
- *  4. Elegir el tema visual en la sección "TEMA".
- *  5. Guardar y publicar. El sitio se actualiza automáticamente.
+ *  4. Configurar la conexión a Cloudinary (sección CLOUDINARY).
+ *  5. Elegir el tema visual en la sección "TEMA".
+ *  6. Guardar y publicar. El sitio se actualiza automáticamente.
  * ============================================================
  */
 
@@ -25,7 +26,7 @@ const CONFIG = {
     nombre: "Residencial [NOMBRE]",           // Nombre completo del residencial
     nombreCorto: "[NOMBRE]",                  // Nombre corto / logo
     eslogan: "[ESLOGAN DEL RESIDENCIAL]",
-    descripcionCorta: "Agrgar una descripcion corta",
+    descripcionCorta: "Agregar una descripcion corta",
     tituloPagina: "[NOMBRE] | Residencial Geriátrico",
     anoCopyright: new Date().getFullYear(),   // Año automático (no editar)
   },
@@ -147,7 +148,30 @@ const CONFIG = {
   ],
 
   /* ---------------------------------------------------------
-   * 8. TEMA VISUAL
+   * 8. CLOUDINARY (galería dinámica + subida de imágenes)
+   *
+   *  Para activar la galería dinámica de actividades:
+   *    1. Crear cuenta en https://cloudinary.com (gratis)
+   *    2. Crear un "Upload preset" de tipo "Unsigned"
+   *    3. Completar cloudName y uploadPreset abajo
+   *
+   *  cloudName    → tu "cloud name" de Cloudinary (ej: 'mi-residencial')
+   *  uploadPreset → el preset unsigned creado en Cloudinary
+   *  baseFolder   → carpeta raíz donde se organizan las fotos
+   *                 (las subcarpetas galería/instalaciones/... van dentro)
+   *  tagGaleria   → tag con el que se etiquetan las fotos de la
+   *                 galería dinámica (se muestran automáticamente
+   *                 en la sección "Galería de Actividades")
+   * --------------------------------------------------------- */
+  cloudinary: {
+    cloudName: '[TU_CLOUD_NAME]',
+    uploadPreset: '[TU_UPLOAD_PRESET]',
+    baseFolder: 'residencial',
+    tagGaleria: 'residencial_galeria',
+  },
+
+  /* ---------------------------------------------------------
+   * 9. TEMA VISUAL
    *    'opcion0' → Verde Oliva (default)
    *    'opcion1' → Minimalista Editorial
    *    'opcion2' → Dark Mode Lujo
@@ -159,7 +183,7 @@ const CONFIG = {
   },
 
   /* ---------------------------------------------------------
-   * 9. TEXTOS AUXILIARES
+   * 10. TEXTOS AUXILIARES
    * --------------------------------------------------------- */
   textos: {
     galeriaActividadesCaption: "Momentos y actividades en nuestro residencial",

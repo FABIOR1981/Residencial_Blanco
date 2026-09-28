@@ -17,10 +17,32 @@ Este es el **único archivo que hay que modificar**. Contiene todas las variable
 | `valores` | Grilla de valores (icono Font Awesome + título + descripción) |
 | `servicios` | Bloques expandibles de servicios |
 | `galeriaInstalaciones` | Imágenes fijas con categoría para filtros |
+| `cloudinary` | **Conexión a Cloudinary** (galería dinámica y subida de fotos) |
 | `tema` | Tema visual (`opcion0` a `opcion3`) |
 | `textos` | Textos auxiliares (captions, intros) |
 
-### Paso 2: Reemplazar imágenes
+### Paso 2: Configurar Cloudinary (galería dinámica + subida)
+
+La galería de actividades se carga desde **Cloudinary** (gratis) y las fotos se suben con `subir_imagenes.html`. Ambos usan la misma configuración, en `js/config.js`:
+
+```javascript
+cloudinary: {
+    cloudName: 'tu_cloud_name',       // tu "cloud name" de Cloudinary
+    uploadPreset: 'tu_upload_preset', // preset de tipo "Unsigned"
+    baseFolder: 'residencial',        // carpeta raíz en Cloudinary
+    tagGaleria: 'residencial_galeria' // tag de las fotos que se muestran
+},
+```
+
+Pasos:
+1. Crear cuenta en [cloudinary.com](https://cloudinary.com)
+2. Crear un **Upload Preset** de tipo `Unsigned`
+3. Completar `cloudName` y `uploadPreset` en `js/config.js`
+4. Subir las fotos desde `subir_imagenes.html` — las de la carpeta **Galería** aparecen automáticamente en el sitio
+
+> No hace falta tocar `js/main.js` ni `subir_imagenes.html`: leen la configuración desde `js/config.js`.
+
+### Paso 3: Reemplazar imágenes
 
 | Archivo | Dónde va |
 |---------|----------|
@@ -32,19 +54,3 @@ Este es el **único archivo que hay que modificar**. Contiene todas las variable
 | `img/instalaciones/habitacion3.webp` | Habitación 3 |
 
 > Mantener los mismos nombres de archivo o actualizar las rutas en `config.js`.
-
-### Paso 3: Configurar galería dinámica (opcional)
-
-La galería de actividades se carga desde **Cloudinary** (gratis). Para activarla:
-
-1. Crear cuenta en [cloudinary.com](https://cloudinary.com)
-2. Crear un **Upload Preset** de tipo `Unsigned`
-3. Subir las fotos con un **tag** específico
-4. Completar en `js/main.js` la constante `CLOUDINARY` y las constantes `CLOUD_NAME`, `UPLOAD_PRESET` y `BASE_FOLDER` de `subir_imagenes.html`:
-
-```javascript
-const CLOUDINARY = {
-    cloudName: 'tu_cloud_name',
-    tag: 'galeria_actividades',
-    uploadPreset: 'tu_upload_preset',
-};

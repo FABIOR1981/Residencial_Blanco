@@ -90,11 +90,13 @@
         <div id="cardsContainer" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
     </div>
 
+    <!-- La configuración central vive en js/config.js (misma que usa el sitio) -->
+    <script src="js/config.js"></script>
     <script>
-        // --- Configuración fija del proyecto (completar con los datos del cliente) ---
-        const CLOUD_NAME = '[TU_CLOUD_NAME]';
-        const UPLOAD_PRESET = '[TU_UPLOAD_PRESET]';
-        const BASE_FOLDER = 'residencial';
+        // --- Configuración Cloudinary: se lee desde CONFIG.cloudinary (js/config.js) ---
+        const CLOUD_NAME   = (typeof CONFIG !== 'undefined' && CONFIG.cloudinary) ? CONFIG.cloudinary.cloudName : '';
+        const UPLOAD_PRESET = (typeof CONFIG !== 'undefined' && CONFIG.cloudinary) ? CONFIG.cloudinary.uploadPreset : '';
+        const BASE_FOLDER  = (typeof CONFIG !== 'undefined' && CONFIG.cloudinary && CONFIG.cloudinary.baseFolder) ? CONFIG.cloudinary.baseFolder : 'residencial';
         const NEW_FOLDER_OPTION = '__nueva__';
         const LAST_FOLDER_KEY = 'residencial_ultima_carpeta_v1';
 

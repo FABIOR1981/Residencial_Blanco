@@ -133,19 +133,11 @@ document.addEventListener('DOMContentLoaded', () => {
     const galeriaDinamica = document.getElementById('galeria-dinamica');
 
     // ── Configuración Cloudinary ─────────────────────────────
-    // Para activar la galería dinámica:
-    //   1. Crear cuenta en https://cloudinary.com (gratis)
-    //   2. Crear un "Upload preset" de tipo "Unsigned"
-    //   3. Subir las fotos con el tag configurado abajo
-    //   4. Completar cloudName, tag y uploadPreset aquí:
-    const CLOUDINARY = {
-        cloudName: '[TU_CLOUD_NAME]',       // ← ej: 'mi-residencial'
-        tag: 'residencial_galeria',          // ← subir_imagenes.html sube con el tag <BASE_FOLDER>_galeria
-        uploadPreset: '[TU_UPLOAD_PRESET]', // ← ej: 'galeria_unsigned'
-    };
+    // Se lee desde CONFIG.cloudinary (js/config.js). No editar aquí.
+    const CLOUDINARY = (typeof CONFIG !== 'undefined' && CONFIG.cloudinary) ? CONFIG.cloudinary : null;
 
-    if (galeriaDinamica && CLOUDINARY.cloudName !== '[TU_CLOUD_NAME]') {
-        fetch(`https://res.cloudinary.com/${CLOUDINARY.cloudName}/image/list/${CLOUDINARY.tag}.json`)
+    if (galeriaDinamica && CLOUDINARY && CLOUDINARY.cloudName && CLOUDINARY.cloudName !== '[TU_CLOUD_NAME]') {
+        fetch(`https://res.cloudinary.com/${CLOUDINARY.cloudName}/image/list/${CLOUDINARY.tagGaleria}.json`)
             .then(response => {
                 if (!response.ok) throw new Error('No se pudo obtener la lista de Cloudinary.');
                 return response.json();
