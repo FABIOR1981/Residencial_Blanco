@@ -1,76 +1,50 @@
-# Residencial Monarca
+# Residencial Geriátrico — Sitio Web (Marca Blanca)
 
-Sitio web estático de Residencial Monarca, un residencial geriátrico que presenta su propuesta de cuidado, servicios, instalaciones y formas de contacto para residentes y sus familias.
+Sitio web estático de una sola página para residenciales geriátricos. Diseñado como **marca blanca**: toda la personalización se centraliza en un único archivo de configuración.
 
-## Funcionalidades
+## Cómo adaptar a un nuevo cliente
 
-- Página de inicio responsive con navegación por secciones.
-- Presentación institucional, misión, visión y valores.
-- Perfil de dirección con contenido expandible.
-- Sección de servicios con información sobre instalaciones, alimentación, talleres y equipo de enfermería.
-- Galería fija de instalaciones organizada por categorías.
-- Galería dinámica de actividades cargada desde `galeria.json`.
-- Filtros de galería y visor ampliado de imágenes mediante lightbox.
-- Gestor local para preparar y optimizar imágenes antes de incorporarlas al sitio.
-- Enlaces de contacto, ubicación y redes sociales.
+### Paso 1: Editar `js/config.js`
 
-## Estructura del proyecto
+Este es el **único archivo que hay que modificar**. Contiene todas las variables de marca:
 
-```text
-.
-├── index.html             # Página principal
-├── gestor_imagenes.html   # Herramienta local de gestión de imágenes
-├── generate-gallery.js    # Genera galeria.json desde img/galeria
-├── css/styles.css         # Estilos del sitio
-├── js/main.js             # Menú, filtros, lightbox y galería dinámica
-├── img/
-│   ├── instalaciones/    # Imágenes fijas de las instalaciones
-│   ├── galeria/           # Imágenes usadas por la galería dinámica
-│   └── director.png       # Imagen del perfil de dirección
-├── netlify.toml           # Configuración de publicación en Netlify
-└── README.md
-```
+| Sección | Qué configurar |
+|---------|---------------|
+| `marca` | Nombre, eslogan, descripción, título de página |
+| `contacto` | Dirección, WhatsApp, Instagram, Facebook, Google Maps |
+| `direccion` | Perfil del responsable (título, subtítulo, foto, texto) |
+| `mision` / `vision` | Textos institucionales |
+| `valores` | Grilla de valores (icono Font Awesome + título + descripción) |
+| `servicios` | Bloques expandibles de servicios |
+| `galeriaInstalaciones` | Imágenes fijas con categoría para filtros |
+| `tema` | Tema visual (`opcion0` a `opcion3`) |
+| `textos` | Textos auxiliares (captions, intros) |
 
-## Ejecución local
+### Paso 2: Reemplazar imágenes
 
-El sitio no necesita un proceso de compilación. Como la galería dinámica carga un archivo JSON, es recomendable usar un servidor HTTP local en lugar de abrir `index.html` directamente.
+| Archivo | Dónde va |
+|---------|----------|
+| `img/director.png` | Foto del responsable de dirección |
+| `img/instalaciones/fachada.webp` | Fachada del edificio |
+| `img/instalaciones/living.webp` | Living / comedor |
+| `img/instalaciones/habitacion1.webp` | Habitación 1 |
+| `img/instalaciones/habitacion2.webp` | Habitación 2 |
+| `img/instalaciones/habitacion3.webp` | Habitación 3 |
 
-Con Node.js:
+&gt; Mantener los mismos nombres de archivo o actualizar las rutas en `config.js`.
 
-```bash
-npx serve .
-```
+### Paso 3: Configurar galería dinámica (opcional)
 
-O con Python:
+La galería de actividades se carga desde **Cloudinary** (gratis). Para activarla:
 
-```bash
-python -m http.server 8000
-```
+1. Crear cuenta en [cloudinary.com](https://cloudinary.com)
+2. Crear un **Upload Preset** de tipo `Unsigned`
+3. Subir las fotos con un **tag** específico
+4. Completar en `js/main.js` la constante `CLOUDINARY`:
 
-Después, abre la URL indicada por el servidor, normalmente `http://localhost:8000`.
-
-## Actualizar la galería dinámica
-
-1. Coloca las imágenes de actividades en `img/galeria/`.
-2. Ejecuta el generador desde la raíz del proyecto:
-
-```bash
-node generate-gallery.js
-```
-
-3. Comprueba que se haya creado o actualizado `galeria.json`.
-4. Recarga el sitio servido localmente.
-
-El generador incluye archivos con extensión `.jpg`, `.jpeg`, `.png`, `.gif` y `.webp`.
-
-## Tecnologías
-
-- HTML5, CSS3 y JavaScript vanilla.
-- Node.js únicamente para generar el índice de la galería.
-- Google Fonts: Playfair Display y Plus Jakarta Sans.
-- Font Awesome 6.4.0 mediante CDN.
-- Netlify como opción de despliegue estático.
-
-## Publicación
-
-El proyecto puede publicarse en Netlify o en cualquier servicio que sirva archivos estáticos. No requiere backend ni base de datos. Antes de publicar, conviene verificar que los enlaces de WhatsApp, redes sociales y ubicación correspondan a los datos definitivos de la residencia.
+```javascript
+const CLOUDINARY = {
+    cloudName: 'tu_cloud_name',
+    tag: 'galeria_actividades',
+    uploadPreset: 'tu_upload_preset',
+};
