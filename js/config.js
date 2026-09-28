@@ -24,8 +24,8 @@ const CONFIG = {
   marca: {
     nombre: "Residencial [NOMBRE]",           // Nombre completo del residencial
     nombreCorto: "[NOMBRE]",                  // Nombre corto / logo
-    eslogan: "“Un hogar donde cuidar es acompañar”",
-    descripcionCorta: "Brindamos un espacio seguro, cálido y profesional pensado para el bienestar integral.",
+    eslogan: "[ESLOGAN DEL RESIDENCIAL]",
+    descripcionCorta: "Un espacio seguro, cálido y profesional pensado para el bienestar integral de cada residente.",
     tituloPagina: "[NOMBRE] | Residencial Geriátrico",
     anoCopyright: new Date().getFullYear(),   // Año automático (no editar)
   },
@@ -35,7 +35,7 @@ const CONFIG = {
    * --------------------------------------------------------- */
   contacto: {
     direccion: "[DIRECCIÓN COMPLETA]",
-    whatsapp: "https://wa.me/5490000000000",              // ← reemplazar por número real
+    whatsapp: "https://wa.me/[CODIGOPAIS][NUMERO]",              // ← ej: https://wa.me/59899123456
     instagram: "https://instagram.com/[usuario]",
     facebook: "https://facebook.com/[pagina]",
     googleMaps: "https://maps.google.com/?q=[DIRECCIÓN+PARA+BUSCAR]",
@@ -47,8 +47,8 @@ const CONFIG = {
    * --------------------------------------------------------- */
   direccion: {
     titulo: "Dirección y Compromiso",
-    subtitulo: "Lic. en Enfermería",
-    foto: "img/director.png",                             // reemplazar imagen
+    subtitulo: "[CARGO / TÍTULO]",
+    foto: "img/perfil-generico.svg",                       // reemplazar por la foto real (ej: img/perfil.webp)
     textoCompleto: `
       <p>[COMPLETAR: trayectoria, formación y motivación del responsable de dirección.]</p>
       <p>[COMPLETAR: por qué nace este proyecto, qué lo diferencia.]</p>

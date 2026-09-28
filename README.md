@@ -24,14 +24,14 @@ Este es el **único archivo que hay que modificar**. Contiene todas las variable
 
 | Archivo | Dónde va |
 |---------|----------|
-| `img/director.png` | Foto del responsable de dirección |
+| `img/perfil-generico.svg` | Perfil genérico; reemplazar por la foto real y actualizar `direccion.foto` en `config.js` |
 | `img/instalaciones/fachada.webp` | Fachada del edificio |
 | `img/instalaciones/living.webp` | Living / comedor |
 | `img/instalaciones/habitacion1.webp` | Habitación 1 |
 | `img/instalaciones/habitacion2.webp` | Habitación 2 |
 | `img/instalaciones/habitacion3.webp` | Habitación 3 |
 
-&gt; Mantener los mismos nombres de archivo o actualizar las rutas en `config.js`.
+> Mantener los mismos nombres de archivo o actualizar las rutas en `config.js`.
 
 ### Paso 3: Configurar galería dinámica (opcional)
 
@@ -40,7 +40,7 @@ La galería de actividades se carga desde **Cloudinary** (gratis). Para activarl
 1. Crear cuenta en [cloudinary.com](https://cloudinary.com)
 2. Crear un **Upload Preset** de tipo `Unsigned`
 3. Subir las fotos con un **tag** específico
-4. Completar en `js/main.js` la constante `CLOUDINARY`:
+4. Completar en `js/main.js` la constante `CLOUDINARY` y las constantes `CLOUD_NAME`, `UPLOAD_PRESET` y `BASE_FOLDER` de `subir_imagenes.html`:
 
 ```javascript
 const CLOUDINARY = {

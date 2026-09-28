@@ -140,7 +140,7 @@ document.addEventListener('DOMContentLoaded', () => {
     //   4. Completar cloudName, tag y uploadPreset aquí:
     const CLOUDINARY = {
         cloudName: '[TU_CLOUD_NAME]',       // ← ej: 'mi-residencial'
-        tag: '[TU_TAG_GALERIA]',            // ← ej: 'galeria_actividades'
+        tag: 'residencial_galeria',          // ← subir_imagenes.html sube con el tag <BASE_FOLDER>_galeria
         uploadPreset: '[TU_UPLOAD_PRESET]', // ← ej: 'galeria_unsigned'
     };
 

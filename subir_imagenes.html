@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Subir Imágenes — Residencial Monarca</title>
+    <title>Subir Imágenes — Residencial</title>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -33,7 +33,7 @@
         <header class="mb-6 border-b pb-5 flex flex-col md:flex-row justify-between items-start md:items-center gap-4" style="border-color:#E7E3DC;">
             <div>
                 <h1 class="text-3xl font-bold tracking-tight" style="color:var(--primary-dark);">Subir de Imágenes</h1>
-                <p class="text-sm mt-1" style="color:var(--text-muted);">El lugar único para optimizar y subir fotos de <strong>Residencial Monarca</strong></p>
+                <p class="text-sm mt-1" style="color:var(--text-muted);">El lugar único para optimizar y subir fotos del <strong>residencial</strong></p>
             </div>
             <div class="flex flex-wrap items-end gap-4 bg-white p-3 rounded-xl border" style="border-color:#E7E3DC;">
                 <div>
@@ -91,12 +91,12 @@
     </div>
 
     <script>
-        // --- Configuración fija del proyecto Monarca (no editable desde la UI) ---
-        const CLOUD_NAME = 'p0qlmlor';
-        const UPLOAD_PRESET = 'subir_gestor';
-        const BASE_FOLDER = 'monarca';
+        // --- Configuración fija del proyecto (completar con los datos del cliente) ---
+        const CLOUD_NAME = '[TU_CLOUD_NAME]';
+        const UPLOAD_PRESET = '[TU_UPLOAD_PRESET]';
+        const BASE_FOLDER = 'residencial';
         const NEW_FOLDER_OPTION = '__nueva__';
-        const LAST_FOLDER_KEY = 'monarca_ultima_carpeta_v1';
+        const LAST_FOLDER_KEY = 'residencial_ultima_carpeta_v1';
 
         const fileInput = document.getElementById('fileInput');
         const cardsContainer = document.getElementById('cardsContainer');
@@ -110,7 +110,7 @@
         const uploadAllBtn = document.getElementById('uploadAllBtn');
 
         // --- Subcarpetas conocidas (recordadas en este navegador) ---
-        const FOLDERS_KEY = 'monarca_subcarpetas_v1';
+        const FOLDERS_KEY = 'residencial_subcarpetas_v1';
         const DEFAULT_FOLDERS = [
             { value: 'galeria', label: 'Galería' },
             { value: 'instalaciones', label: 'Instalaciones' }
