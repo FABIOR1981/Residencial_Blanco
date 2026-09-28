@@ -1,0 +1,179 @@
+document.addEventListener('DOMContentLoaded', () => {
+    // 1. Menú Responsive Móvil
+    const mobileMenu = document.getElementById('mobile-menu');
+    const navList = document.getElementById('nav-list');
+
+    if (mobileMenu && navList) {
+        mobileMenu.addEventListener('click', () => {
+            navList.classList.toggle('active');
+        });
+    }
+
+    // 2. Filtrado de Galería (Instalaciones)
+    const filterBtns = document.querySelectorAll('.filter-btn');
+    
+    filterBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            const currentActive = document.querySelector('.filter-btn.active');
+            if (currentActive) currentActive.classList.remove('active');
+            btn.classList.add('active');
+
+            const filterValue = btn.getAttribute('data-filter');
+            // Filtrar solo dentro de instalaciones para no afectar la galería dinámica
+            const instalacionesItems = document.querySelectorAll('#instalaciones .gallery-item');
+
+            instalacionesItems.forEach(item => {
+                if (filterValue === 'all' || item.getAttribute('data-category') === filterValue) {
+                    item.style.display = 'block';
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+        });
+    });
+
+    // 3. Cargar Galería Dinámica desde Cloudinary
+    const galeriaDinamica = document.getElementById('galeria-dinamica');
+    const cloudName = 'p0qlmlor';       // Cloud Name
+    const tag = 'monarca_galeria';      // Etiqueta asignada a las fotos en Cloudinary
+    
+    if (galeriaDinamica) {
+        fetch(`https://res.cloudinary.com/${cloudName}/image/list/${tag}.json`)
+            .then(response => {
+                if (!response.ok) throw new Error("No se pudo obtener la lista de Cloudinary. Verifica el Tag o la opción 'Resource list' en Security.");
+                return response.json();
+            })
+            .then(data => {
+                const imagenes = data.resources || [];
+
+                if (imagenes.length === 0) {
+                    galeriaDinamica.innerHTML = '<p style="grid-column: 1 / -1; text-align: center; color: var(--text-muted);">Próximamente compartiremos más momentos.</p>';
+                    return;
+                }
+
+                // Generar HTML por cada imagen aprovechando la optimización automática (q_auto, f_auto)
+                const htmlImagenes = imagenes.map(img => {
+                    const urlImagen = `https://res.cloudinary.com/${cloudName}/image/upload/q_auto,f_auto/v${img.version}/${img.public_id}.${img.format}`;
+                    
+                    return `
+                        <div class="gallery-item">
+                            <img src="${urlImagen}" alt="Actividad en Monarca" loading="lazy">
+                            <div class="gallery-overlay"></div>
+                        </div>
+                    `;
+                }).join('');
+                
+                galeriaDinamica.innerHTML = htmlImagenes;
+
+                // Inicializar Lightbox después de renderizar las fotos de Cloudinary
+                inicializarLightbox();
+            })
+            .catch(error => {
+                console.error('Error cargando la galería desde Cloudinary:', error);
+                galeriaDinamica.innerHTML = '<p style="grid-column: 1 / -1; text-align: center; color: var(--text-muted);">Próximamente compartiremos más momentos.</p>';
+                inicializarLightbox(); // Inicializa para las fotos fijas si la API falla
+            });
+    } else {
+        inicializarLightbox();
+    }
+
+    // 4. Lógica general para botones expandibles ("Ver más" / "Ver menos")
+    const expandableButtons = document.querySelectorAll('.btn-leer-mas');
+
+    expandableButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            const targetId = button.getAttribute('data-target');
+            const container = document.getElementById(targetId);
+
+            if (container) {
+                container.classList.toggle('expanded');
+
+                if (container.classList.contains('expanded')) {
+                    button.textContent = 'Ver menos';
+                } else {
+                    button.textContent = 'Ver más';
+                    container.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                }
+            }
+        });
+    });
+
+    // 5. Lógica del Lightbox
+    function inicializarLightbox() {
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImg = document.getElementById('lightbox-img');
+        const lightboxClose = document.getElementById('lightbox-close');
+        const allGalleryItems = document.querySelectorAll('.gallery-item');
+
+        if (!lightbox || !lightboxImg || !lightboxClose) return;
+
+        allGalleryItems.forEach(item => {
+            // Prevenir múltiples eventos clonando el nodo
+            const nuevoItem = item.cloneNode(true);
+            item.parentNode.replaceChild(nuevoItem, item);
+            
+            nuevoItem.addEventListener('click', () => {
+                const imgElement = nuevoItem.querySelector('img');
+                if (imgElement) {
+                    lightboxImg.setAttribute('src', imgElement.getAttribute('src'));
+                    lightbox.style.display = 'flex';
+                }
+            });
+        });
+
+        lightboxClose.addEventListener('click', () => {
+            lightbox.style.display = 'none';
+        });
+
+        lightbox.addEventListener('click', (e) => {
+            if (e.target !== lightboxImg) {
+                lightbox.style.display = 'none';
+            }
+        });
+    }
+
+    // 6. Conmutador de Temas / Estéticas basado en config.js
+    const themeSelector = document.getElementById('theme-selector');
+    const themeWidget = document.querySelector('.theme-switch-widget');
+
+    // Permite forzar el modo pruebas por URL sin tocar config.js ni afectar a otros visitantes:
+    // https://tu-sitio/?modo=pruebas
+    const urlParams = new URLSearchParams(window.location.search);
+    const forzarPruebasPorUrl = urlParams.get('modo') === 'pruebas';
+
+    // Comprobar la configuración general en config.js (la URL tiene prioridad)
+    const modoPruebas = forzarPruebasPorUrl || ((typeof CONFIG !== 'undefined' && typeof CONFIG.MODO_PRUEBAS !== 'undefined')
+        ? CONFIG.MODO_PRUEBAS
+        : true);
+
+    if (!modoPruebas) {
+        // MODO PRODUCCIÓN: Oculta el selector y fija la estética elegida
+        const temaFijo = (typeof CONFIG !== 'undefined' && CONFIG.TEMA_DEFINITIVO) 
+            ? CONFIG.TEMA_DEFINITIVO 
+            : 'opcion0';
+        
+        document.documentElement.setAttribute('data-theme', temaFijo);
+        if (themeWidget) {
+            themeWidget.style.display = 'none';
+        }
+    } else {
+        // MODO PRUEBAS: Habilita el selector flotante
+        if (themeSelector && themeWidget) {
+            themeWidget.style.display = 'flex';
+            
+            const defaultTheme = (typeof CONFIG !== 'undefined' && CONFIG.TEMA_DEFINITIVO) 
+                ? CONFIG.TEMA_DEFINITIVO 
+                : 'opcion0';
+            const savedTheme = localStorage.getItem('monarca_theme') || defaultTheme;
+            
+            document.documentElement.setAttribute('data-theme', savedTheme);
+            themeSelector.value = savedTheme;
+
+            themeSelector.addEventListener('change', (e) => {
+                const selectedTheme = e.target.value;
+                document.documentElement.setAttribute('data-theme', selectedTheme);
+                localStorage.setItem('monarca_theme', selectedTheme);
+            });
+        }
+    }
+});
