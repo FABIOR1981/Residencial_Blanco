@@ -25,7 +25,7 @@ const CONFIG = {
     nombre: "Residencial [NOMBRE]",           // Nombre completo del residencial
     nombreCorto: "[NOMBRE]",                  // Nombre corto / logo
     eslogan: "[ESLOGAN DEL RESIDENCIAL]",
-    descripcionCorta: "Un espacio seguro, cálido y profesional pensado para el bienestar integral de cada residente.",
+    descripcionCorta: "Agrgar una descripcion corta",
     tituloPagina: "[NOMBRE] | Residencial Geriátrico",
     anoCopyright: new Date().getFullYear(),   // Año automático (no editar)
   },
@@ -154,7 +154,7 @@ const CONFIG = {
    *    'opcion3' → Orgánico Eco-Moderno
    * --------------------------------------------------------- */
   tema: {
-    MODO_PRUEBAS: false,       // true = muestra selector de temas flotante
+    MODO_PRUEBAS: true,       // true = muestra selector de temas flotante
     TEMA_DEFINITIVO: 'opcion0'
   },
 
