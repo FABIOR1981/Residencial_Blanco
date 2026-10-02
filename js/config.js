@@ -9,8 +9,8 @@ const CONFIG = {
     NOMBRE_COMPLETO: 'Nombre Completo de la Institución',
     TITULO: 'Título del Sitio | Eslogan o Actividad',
     DESCRIPCION: 'Descripción general de la institución o servicio, enfocada en la calidad, el profesionalismo y el bienestar.',
-    LOGO: 'logo_transparente.webp',
-    IMAGEN_DIRECTOR: 'director.webp',
+    LOGO: 'https://res.cloudinary.com/p0qlmlor/image/upload/q_auto,f_auto,w_1200/v1/enBlanco/Residencial/personal/logo_transparente.webp',
+    IMAGEN_DIRECTOR: 'https://res.cloudinary.com/p0qlmlor/image/upload/q_auto,f_auto,w_1200/v1/enBlanco/Residencial/personal/director.webp',
     IMAGEN_HERO: 'https://res.cloudinary.com/p0qlmlor/image/upload/q_auto,f_auto,w_1200/v1/enBlanco/Residencial/instalaciones/fachada.webp',
     ANO: '2026'
   },
