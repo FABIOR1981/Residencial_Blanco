@@ -1,6 +1,10 @@
-# Residencial Monarca
+# Plantilla de residencial marca blanca
 
 Sitio web estático de Residencial Monarca, un residencial geriátrico que presenta su propuesta de cuidado, servicios, instalaciones y formas de contacto para residentes y sus familias.
+
+## Personalización
+
+Toda la identidad, los textos, las imágenes, el contacto, las redes sociales y la configuración de Cloudinary se editan en `js/config.js`. La plantilla no requiere modificar `index.html`, `js/main.js` ni `css/styles.css` para adaptarla a otro residencial.
 
 ## Funcionalidades
 

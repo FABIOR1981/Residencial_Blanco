@@ -1,4 +1,71 @@
 document.addEventListener('DOMContentLoaded', () => {
+    const cfgMarca = (typeof CONFIG !== 'undefined' && CONFIG.MARCA) ? CONFIG.MARCA : {};
+    const cfgTextos = (typeof CONFIG !== 'undefined' && CONFIG.TEXTOS) ? CONFIG.TEXTOS : {};
+    const cfgTema = (typeof CONFIG !== 'undefined' && CONFIG.TEMA) ? CONFIG.TEMA : {};
+
+    function resolverTexto(texto) {
+        return String(texto).replace(/\{([^}]+)\}/g, (_, clave) => {
+            if (clave === 'NOMBRE') return cfgMarca.NOMBRE || '';
+            if (clave === 'LEMA') return cfgTextos.LEMA || '';
+            return `{${clave}}`;
+        });
+    }
+
+    function aplicarConfiguracion() {
+        document.querySelectorAll('[data-config-text]').forEach(elemento => {
+            const clave = elemento.dataset.configText;
+            if (cfgTextos[clave] !== undefined) elemento.textContent = resolverTexto(cfgTextos[clave]);
+        });
+
+        document.querySelectorAll('[data-config-brand]').forEach(elemento => {
+            const clave = elemento.dataset.configBrand;
+            if (cfgMarca[clave] !== undefined) elemento.textContent = resolverTexto(cfgMarca[clave]);
+        });
+
+        document.querySelectorAll('[data-config-html]').forEach(elemento => {
+            const clave = elemento.dataset.configHtml;
+            if (cfgTextos[clave] !== undefined) elemento.innerHTML = resolverTexto(cfgTextos[clave]);
+        });
+
+        document.querySelectorAll('[data-config-attr]').forEach(elemento => {
+            const [atributo, seccion, clave] = elemento.dataset.configAttr.split(':');
+            const fuente = seccion === 'MARCA' ? cfgMarca : cfgTextos;
+            if (fuente[clave] !== undefined) elemento.setAttribute(atributo, resolverTexto(fuente[clave]));
+        });
+
+        document.querySelectorAll('[data-config-brand-attr]').forEach(elemento => {
+            const [atributo, clave] = elemento.dataset.configBrandAttr.split(':');
+            if (cfgMarca[clave] !== undefined) elemento.setAttribute(atributo, resolverTexto(cfgMarca[clave]));
+        });
+
+        Object.entries(cfgTema).forEach(([clave, valor]) => {
+            const nombreVariable = {
+                PRIMARIO: '--primary',
+                PRIMARIO_OSCURO: '--primary-dark',
+                ACENTO: '--accent',
+                FONDO: '--bg-light',
+                TEXTO: '--text-main',
+                FUENTE_TITULOS: '--font-heading',
+                FUENTE_TEXTO: '--font-body'
+            }[clave];
+            if (nombreVariable) document.documentElement.style.setProperty(nombreVariable, valor);
+        });
+
+        if (cfgMarca.IMAGEN_HERO) {
+            document.documentElement.style.setProperty('--hero-image', `url("${cfgMarca.IMAGEN_HERO}")`);
+        }
+
+        if (cfgMarca.TITULO) document.title = cfgMarca.TITULO;
+        const descripcion = document.querySelector('meta[name="description"]');
+        if (descripcion && cfgMarca.DESCRIPCION) descripcion.setAttribute('content', cfgMarca.DESCRIPCION);
+
+        document.querySelectorAll('[data-config-year]').forEach(elemento => {
+            elemento.textContent = cfgMarca.ANO || new Date().getFullYear();
+        });
+    }
+
+    aplicarConfiguracion();
+
     // 1. Menú Responsive Móvil
     const mobileMenu = document.getElementById('mobile-menu');
     const navList = document.getElementById('nav-list');
@@ -34,7 +101,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (titulo && titulo.trim()) return titulo.trim();
 
         const nombre = imagen.public_id.split('/').pop().replace(/[-_]+/g, ' ').trim();
-        return nombre ? nombre.charAt(0).toUpperCase() + nombre.slice(1) : 'Monarca';
+        return nombre ? nombre.charAt(0).toUpperCase() + nombre.slice(1) : (cfgTextos.FALLBACK_GALERIA || 'Galería');
     }
 
     function obtenerDescripcion(imagen) {
@@ -208,9 +275,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 container.classList.toggle('expanded');
 
                 if (container.classList.contains('expanded')) {
-                    button.textContent = 'Ver menos';
+                    button.textContent = cfgTextos.BOTON_MENOS || 'Ver menos';
                 } else {
-                    button.textContent = 'Ver más';
+                    button.textContent = cfgTextos.BOTON_MAS || 'Ver más';
                     container.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
                 }
             }
@@ -259,7 +326,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Enlace normal de WhatsApp (para botones de texto o secciones) — con el mismo mensaje predeterminado
-    const mensajeWhatsapp = "Hola, quiero consultar sobre los servicios de Residencial Monarca";
+    const mensajeWhatsapp = `Hola, quiero consultar sobre los servicios de ${cfgMarca.NOMBRE_COMPLETO || 'el residencial'}`;
     asignarEnlace('whatsapp', cfgContacto.WHATSAPP_NUMERO && `https://wa.me/${cfgContacto.WHATSAPP_NUMERO}?text=${encodeURIComponent(mensajeWhatsapp)}`);
 
     // Enlace específico para el Botón Flotante con el mismo mensaje predeterminado
