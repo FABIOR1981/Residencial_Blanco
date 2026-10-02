@@ -672,6 +672,485 @@ footer {
     }
 }
 
+/* ============================================================
+   COMPOSICIONES DIFERENCIADAS
+   Estas reglas redefinen la estructura visual, no solo la paleta.
+   ============================================================ */
+
+/* 1. Editorial: navegación lateral y lectura de publicación. */
+body[data-ui-style="1"] {
+    padding-left: 190px;
+    background: #f2eee8;
+}
+
+body[data-ui-style="1"] header {
+    position: fixed;
+    inset: 0 auto 0 0;
+    width: 190px;
+    height: 100vh;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: stretch;
+    padding: 2rem 1.25rem;
+    background: #e8e0d5;
+    border-right: 1px solid rgba(64, 45, 30, 0.12);
+}
+
+body[data-ui-style="1"] .logo {
+    margin-bottom: 4rem;
+}
+
+body[data-ui-style="1"] .logo img {
+    max-width: 145px;
+    max-height: 64px;
+}
+
+body[data-ui-style="1"] nav {
+    width: 100%;
+}
+
+body[data-ui-style="1"] nav ul {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.25rem;
+}
+
+body[data-ui-style="1"] nav a {
+    font-family: var(--font-heading);
+    font-size: 1.05rem;
+}
+
+body[data-ui-style="1"] .ui-style-control {
+    margin-top: auto;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+body[data-ui-style="1"] .hero {
+    height: 100vh;
+    min-height: 680px;
+    justify-content: flex-end;
+    align-items: flex-start;
+    padding: 10% 12% 12%;
+    text-align: left;
+}
+
+body[data-ui-style="1"] .hero-content {
+    max-width: 760px;
+}
+
+body[data-ui-style="1"] .hero-content h1 {
+    font-size: clamp(3.8rem, 8vw, 8rem);
+    line-height: 0.88;
+    letter-spacing: -0.04em;
+}
+
+body[data-ui-style="1"] .about-grid {
+    grid-template-columns: minmax(0, 1fr) minmax(260px, 0.58fr);
+    align-items: start;
+}
+
+body[data-ui-style="1"] .card-director {
+    margin-top: 5rem;
+    transform: none;
+}
+
+body[data-ui-style="1"] .combined-mv {
+    border-radius: 0;
+    background: transparent;
+    box-shadow: none;
+    border: 0;
+    border-top: 1px solid var(--primary);
+    padding: 1.5rem 0;
+}
+
+/* 2. Minimalista: ficha funcional, lineal y sin tarjetas flotantes. */
+body[data-ui-style="2"] {
+    background: #f7f7f5;
+}
+
+body[data-ui-style="2"] header {
+    position: sticky;
+    height: 74px;
+    padding: 0 7%;
+    border-bottom: 1px solid #d9ddd8;
+    box-shadow: none;
+}
+
+body[data-ui-style="2"] .hero {
+    height: auto;
+    min-height: 620px;
+    background: linear-gradient(90deg, #f7f7f5 0 56%, transparent 56%), var(--hero-image) right center/44% 100% no-repeat;
+    justify-content: flex-start;
+    text-align: left;
+    padding: 11% 7%;
+}
+
+body[data-ui-style="2"] .hero-content {
+    max-width: 560px;
+}
+
+body[data-ui-style="2"] .hero-content h1 {
+    font-family: var(--font-body);
+    font-size: clamp(2.8rem, 6vw, 5.7rem);
+    font-weight: 500;
+    letter-spacing: -0.06em;
+    color: var(--primary-dark);
+}
+
+body[data-ui-style="2"] .hero-content h2 {
+    color: var(--text-main);
+    font-style: normal;
+    text-align: left;
+}
+
+body[data-ui-style="2"] section {
+    max-width: 1280px;
+    margin: auto;
+    padding: 5rem 7%;
+}
+
+body[data-ui-style="2"] .section-title {
+    margin-bottom: 2rem;
+    text-align: left;
+    font-family: var(--font-body);
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+}
+
+body[data-ui-style="2"] .section-title::after {
+    margin: 0.8rem 0 0;
+    background: #b8c0b8;
+}
+
+body[data-ui-style="2"] .about-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+}
+
+body[data-ui-style="2"] .card-director,
+body[data-ui-style="2"] .combined-mv {
+    padding: 2rem 2.5rem;
+    background: transparent;
+    border: 1px solid #d9ddd8;
+    box-shadow: none;
+}
+
+body[data-ui-style="2"] .values-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0;
+}
+
+body[data-ui-style="2"] .value-item {
+    min-height: 180px;
+    padding: 1.5rem 0;
+    background: transparent;
+    border: 0;
+    border-top: 1px solid #d9ddd8;
+    box-shadow: none;
+}
+
+body[data-ui-style="2"] .services-container {
+    grid-template-columns: 1fr;
+    gap: 0;
+    padding: 0;
+}
+
+body[data-ui-style="2"] .service-block {
+    min-height: 0;
+    padding: 2rem 0;
+    background: transparent;
+    border: 0;
+    border-top: 1px solid #d9ddd8;
+    box-shadow: none;
+}
+
+/* 3. Inmersivo: portada dominante, bloques oscuros y navegación discreta. */
+body[data-ui-style="3"] header {
+    position: fixed;
+    background: linear-gradient(180deg, rgba(7, 11, 9, 0.9), transparent);
+    box-shadow: none;
+}
+
+body[data-ui-style="3"] .hero {
+    height: 100vh;
+    min-height: 720px;
+    background: linear-gradient(90deg, rgba(5, 8, 6, 0.94), rgba(5, 8, 6, 0.22)), var(--hero-image) center/cover no-repeat;
+    justify-content: flex-start;
+    text-align: left;
+    padding: 22vh 12% 10%;
+}
+
+body[data-ui-style="3"] .hero-content {
+    max-width: 700px;
+}
+
+body[data-ui-style="3"] .hero-content h1 {
+    font-size: clamp(4rem, 10vw, 9rem);
+    line-height: 0.82;
+    letter-spacing: -0.05em;
+}
+
+body[data-ui-style="3"] .hero-content h2 {
+    margin-top: 2rem;
+    text-align: left;
+    color: var(--accent);
+}
+
+body[data-ui-style="3"] section {
+    padding-top: 8rem;
+    padding-bottom: 8rem;
+}
+
+body[data-ui-style="3"] .section-title {
+    text-align: left;
+    font-size: clamp(2.4rem, 5vw, 4.5rem);
+}
+
+body[data-ui-style="3"] .section-title::after {
+    margin-left: 0;
+}
+
+body[data-ui-style="3"] .about-grid {
+    grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
+}
+
+body[data-ui-style="3"] .values-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+body[data-ui-style="3"] .value-item,
+body[data-ui-style="3"] .service-block {
+    border: 1px solid rgba(217, 185, 120, 0.18);
+    border-radius: 2px;
+}
+
+/* 4. Revista: composición bento, piezas de tamaños distintos y galería protagonista. */
+body[data-ui-style="4"] header {
+    position: absolute;
+    background: linear-gradient(180deg, rgba(15, 22, 17, 0.78), transparent);
+    box-shadow: none;
+}
+
+body[data-ui-style="4"] .hero {
+    height: 86vh;
+    min-height: 680px;
+    align-items: flex-end;
+    justify-content: flex-start;
+    padding: 0 8% 8%;
+    text-align: left;
+}
+
+body[data-ui-style="4"] .hero-content {
+    max-width: 780px;
+    padding: 2.5rem;
+    background: var(--white);
+    color: var(--text-main);
+    border-radius: 2px;
+    border-left: 8px solid var(--accent);
+    box-shadow: 0 24px 60px rgba(0, 0, 0, 0.2);
+}
+
+body[data-ui-style="4"] .hero-content h1 {
+    color: var(--primary-dark);
+    font-size: clamp(3.2rem, 7vw, 7rem);
+    line-height: 0.88;
+    letter-spacing: -0.04em;
+}
+
+body[data-ui-style="4"] .hero-content h2 {
+    color: var(--primary);
+    text-align: left;
+}
+
+body[data-ui-style="4"] .hero-content p {
+    color: var(--text-main);
+    margin-left: 0;
+}
+
+body[data-ui-style="4"] .about-grid {
+    grid-template-columns: minmax(280px, 0.72fr) minmax(0, 1.28fr);
+    align-items: start;
+}
+
+body[data-ui-style="4"] .card-director {
+    margin-top: 4rem;
+}
+
+body[data-ui-style="4"] .combined-mv {
+    border-radius: 2px;
+    border-top-width: 8px;
+}
+
+body[data-ui-style="4"] .values-grid {
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    grid-auto-rows: minmax(150px, auto);
+    gap: 1rem;
+}
+
+body[data-ui-style="4"] .values-grid .value-item:nth-child(1),
+body[data-ui-style="4"] .values-grid .value-item:nth-child(4) {
+    grid-column: span 5;
+}
+
+body[data-ui-style="4"] .values-grid .value-item:nth-child(2),
+body[data-ui-style="4"] .values-grid .value-item:nth-child(3),
+body[data-ui-style="4"] .values-grid .value-item:nth-child(5),
+body[data-ui-style="4"] .values-grid .value-item:nth-child(6) {
+    grid-column: span 7;
+}
+
+body[data-ui-style="4"] .services-container {
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    gap: 1rem;
+    padding: 0;
+}
+
+body[data-ui-style="4"] .service-block {
+    grid-column: span 6;
+    min-height: 390px;
+}
+
+body[data-ui-style="4"] .service-block:nth-child(1),
+body[data-ui-style="4"] .service-block:nth-child(4) {
+    grid-column: span 7;
+}
+
+body[data-ui-style="4"] .service-block:nth-child(2),
+body[data-ui-style="4"] .service-block:nth-child(3) {
+    grid-column: span 5;
+    transform: none;
+}
+
+body[data-ui-style="4"] .gallery-grid {
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    grid-auto-rows: 260px;
+}
+
+body[data-ui-style="4"] .gallery-item {
+    grid-column: span 4;
+    height: auto;
+}
+
+body[data-ui-style="4"] .gallery-item:nth-child(1) {
+    grid-column: span 8;
+    grid-row: span 2;
+}
+
+body[data-ui-style="4"] .gallery-item:nth-child(2),
+body[data-ui-style="4"] .gallery-item:nth-child(3) {
+    grid-column: span 4;
+}
+
+@media (max-width: 900px) {
+    body[data-ui-style="1"] {
+        padding-left: 0;
+    }
+
+    body[data-ui-style="1"] header {
+        position: fixed;
+        inset: 0 0 auto;
+        width: 100%;
+        height: auto;
+        flex-direction: row;
+        align-items: center;
+        padding: 0.85rem 5%;
+    }
+
+    body[data-ui-style="1"] .logo {
+        margin-bottom: 0;
+    }
+
+    body[data-ui-style="1"] .ui-style-control {
+        margin: 0 1rem 0 auto;
+        flex-direction: row;
+        align-items: center;
+    }
+
+    body[data-ui-style="1"] nav ul {
+        display: none;
+    }
+
+    body[data-ui-style="1"] nav ul.active {
+        display: flex;
+    }
+
+    body[data-ui-style="1"] .hero {
+        min-height: 700px;
+    }
+
+    body[data-ui-style="1"] .about-grid,
+    body[data-ui-style="2"] .about-grid,
+    body[data-ui-style="3"] .about-grid,
+    body[data-ui-style="4"] .about-grid {
+        grid-template-columns: 1fr;
+    }
+
+    body[data-ui-style="3"] .values-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    body[data-ui-style="4"] .values-grid,
+    body[data-ui-style="4"] .services-container,
+    body[data-ui-style="4"] .gallery-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    body[data-ui-style="4"] .values-grid .value-item,
+    body[data-ui-style="4"] .service-block,
+    body[data-ui-style="4"] .service-block:nth-child(1),
+    body[data-ui-style="4"] .service-block:nth-child(2),
+    body[data-ui-style="4"] .service-block:nth-child(3),
+    body[data-ui-style="4"] .service-block:nth-child(4) {
+        grid-column: span 1;
+    }
+
+    body[data-ui-style="4"] .gallery-item,
+    body[data-ui-style="4"] .gallery-item:nth-child(1),
+    body[data-ui-style="4"] .gallery-item:nth-child(2),
+    body[data-ui-style="4"] .gallery-item:nth-child(3) {
+        grid-column: span 1;
+        grid-row: span 1;
+    }
+}
+
+@media (max-width: 600px) {
+    body[data-ui-style="1"] .hero,
+    body[data-ui-style="2"] .hero,
+    body[data-ui-style="3"] .hero,
+    body[data-ui-style="4"] .hero {
+        min-height: 620px;
+        padding: 8rem 7% 3rem;
+        align-items: center;
+    }
+
+    body[data-ui-style="2"] .hero {
+        background: var(--bg-light);
+    }
+
+    body[data-ui-style="4"] .hero-content {
+        padding: 1.5rem;
+    }
+
+    body[data-ui-style="2"] .values-grid,
+    body[data-ui-style="3"] .values-grid,
+    body[data-ui-style="4"] .values-grid,
+    body[data-ui-style="4"] .services-container,
+    body[data-ui-style="4"] .gallery-grid {
+        grid-template-columns: 1fr;
+    }
+
+    body[data-ui-style="4"] .values-grid .value-item,
+    body[data-ui-style="4"] .service-block,
+    body[data-ui-style="4"] .gallery-item,
+    body[data-ui-style="4"] .gallery-item:nth-child(1) {
+        grid-column: auto;
+        grid-row: auto;
+    }
+}
+
 .logo {
     display: flex;
     align-items: center; /* Esto asegura que el logo quede centrado verticalmente */
