@@ -1500,6 +1500,229 @@ body[data-ui-style="4"] .gallery-item:nth-child(1) {
     }
 }
 
+/* 5. Jardín Vivo: recorrido cálido, orgánico y centrado en el bienestar. */
+body[data-ui-style="5"] {
+    --primary: #557468;
+    --primary-dark: #304d45;
+    --accent: #d88d68;
+    --bg-light: #f5f1e8;
+    --text-main: #2c3d3a;
+    --text-muted: #687873;
+    --white: #fffdf8;
+    --card-radius: 24px;
+    --border-card: 1px solid rgba(85, 116, 104, 0.15);
+    --shadow: 0 16px 40px rgba(65, 84, 75, 0.1);
+    background: var(--bg-light);
+}
+
+body[data-ui-style="5"] header {
+    position: sticky;
+    top: 0;
+    min-height: 88px;
+    background: rgba(255, 253, 248, 0.88);
+    backdrop-filter: blur(16px);
+    box-shadow: 0 4px 20px rgba(65, 84, 75, 0.08);
+    z-index: 1000;
+}
+
+body[data-ui-style="5"] nav a,
+body[data-ui-style="5"] .ui-style-control,
+body[data-ui-style="5"] .ui-style-control select {
+    color: var(--primary-dark);
+}
+
+body[data-ui-style="5"] .hero {
+    height: auto;
+    min-height: 720px;
+    justify-content: flex-start;
+    text-align: left;
+    padding: 8rem 8% 8rem;
+    background: linear-gradient(90deg, var(--bg-light) 0 50%, rgba(245, 241, 232, 0.1) 50%), var(--hero-image) right center/52% 100% no-repeat;
+    color: var(--text-main);
+}
+
+body[data-ui-style="5"] .hero-content {
+    max-width: 600px;
+    padding-right: 3rem;
+}
+
+body[data-ui-style="5"] .hero-content h1 {
+    color: var(--primary-dark);
+    font-size: clamp(3rem, 6vw, 6rem);
+    line-height: 0.94;
+    letter-spacing: -0.04em;
+}
+
+body[data-ui-style="5"] .hero-content h2,
+body[data-ui-style="5"] .hero-content p {
+    color: var(--text-main);
+    text-align: left;
+}
+
+body[data-ui-style="5"] .hero-content h2 {
+    font-style: normal;
+}
+
+body[data-ui-style="5"] .hero-content p {
+    margin-left: 0;
+}
+
+body[data-ui-style="5"] section {
+    padding-top: 6rem;
+    padding-bottom: 6rem;
+}
+
+body[data-ui-style="5"] #mision-vision {
+    background: #fffdf8;
+}
+
+body[data-ui-style="5"] #mision-vision .about-grid {
+    grid-template-columns: minmax(0, 1.1fr) minmax(280px, 0.9fr);
+    align-items: center;
+}
+
+body[data-ui-style="5"] .card-director,
+body[data-ui-style="5"] .combined-mv,
+body[data-ui-style="5"] .service-block,
+body[data-ui-style="5"] .value-item {
+    border: 0;
+    box-shadow: var(--shadow);
+}
+
+body[data-ui-style="5"] .card-director {
+    border-radius: 42px 8px 42px 8px;
+}
+
+body[data-ui-style="5"] .combined-mv {
+    border-radius: 8px 42px 8px 42px;
+    border-top: 6px solid var(--accent);
+}
+
+body[data-ui-style="5"] #valores {
+    background: #e5eee8;
+}
+
+body[data-ui-style="5"] #valores .values-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1.25rem;
+}
+
+body[data-ui-style="5"] #valores .value-item {
+    background: rgba(255, 253, 248, 0.78);
+    border-radius: 12px 32px 12px 32px;
+}
+
+body[data-ui-style="5"] #servicios {
+    background: #fffdf8 !important;
+}
+
+body[data-ui-style="5"] #servicios .services-container {
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+    gap: 1rem;
+    padding: 0;
+}
+
+body[data-ui-style="5"] #servicios .service-block {
+    grid-column: span 2;
+    min-height: 360px;
+    background: var(--bg-light);
+}
+
+body[data-ui-style="5"] #servicios .service-block:first-child {
+    grid-column: span 3;
+    background: #dce9e0;
+}
+
+body[data-ui-style="5"] #servicios .service-block:last-child {
+    grid-column: span 3;
+    background: #f6ded2;
+}
+
+body[data-ui-style="5"] #instalaciones,
+body[data-ui-style="5"] #galeria {
+    background: #f5f1e8;
+}
+
+body[data-ui-style="5"] #instalaciones .gallery-grid,
+body[data-ui-style="5"] #galeria .gallery-grid {
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    grid-auto-rows: 180px;
+    gap: 1rem;
+}
+
+body[data-ui-style="5"] .gallery-item,
+body[data-ui-style="5"] .gallery-item:nth-child(1),
+body[data-ui-style="5"] .gallery-item:nth-child(2),
+body[data-ui-style="5"] .gallery-item:nth-child(3) {
+    grid-column: span 3;
+    grid-row: span 1;
+    height: auto;
+    border-radius: 28px 8px 28px 8px;
+}
+
+body[data-ui-style="5"] .gallery-item:nth-child(1) {
+    grid-column: span 6;
+    grid-row: span 2;
+}
+
+body[data-ui-style="5"] #contacto {
+    background: #304d45;
+    color: #fffdf8;
+}
+
+body[data-ui-style="5"] #contacto .section-title,
+body[data-ui-style="5"] #contacto .contact-content,
+body[data-ui-style="5"] #contacto strong {
+    color: #fffdf8;
+}
+
+body[data-ui-style="5"] footer {
+    background: #243a35;
+}
+
+@media (max-width: 900px) {
+    body[data-ui-style="5"] #mision-vision .about-grid,
+    body[data-ui-style="5"] #valores .values-grid,
+    body[data-ui-style="5"] #servicios .services-container {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    body[data-ui-style="5"] #servicios .service-block,
+    body[data-ui-style="5"] #servicios .service-block:first-child,
+    body[data-ui-style="5"] #servicios .service-block:last-child {
+        grid-column: span 1;
+    }
+}
+
+@media (max-width: 700px) {
+    body[data-ui-style="5"] .hero {
+        min-height: 620px;
+        padding: 8rem 7% 4rem;
+        background: linear-gradient(180deg, rgba(245, 241, 232, 0.2), rgba(245, 241, 232, 0.85)), var(--hero-image) center/cover no-repeat;
+    }
+
+    body[data-ui-style="5"] .hero-content {
+        padding: 1.5rem;
+        background: rgba(255, 253, 248, 0.9);
+        border-radius: 24px 6px 24px 6px;
+    }
+
+    body[data-ui-style="5"] #mision-vision .about-grid,
+    body[data-ui-style="5"] #valores .values-grid,
+    body[data-ui-style="5"] #servicios .services-container,
+    body[data-ui-style="5"] #instalaciones .gallery-grid,
+    body[data-ui-style="5"] #galeria .gallery-grid {
+        grid-template-columns: 1fr;
+    }
+
+    body[data-ui-style="5"] .gallery-item,
+    body[data-ui-style="5"] .gallery-item:nth-child(1) {
+        grid-column: auto;
+        grid-row: auto;
+        min-height: 240px;
+    }
+}
+
 .logo {
     display: flex;
     align-items: center; /* Esto asegura que el logo quede centrado verticalmente */

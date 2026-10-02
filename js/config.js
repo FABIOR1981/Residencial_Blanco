@@ -32,10 +32,11 @@ const CONFIG = {
     MOSTRAR_SELECTOR: true,
     OPCIONES: [
       { ID: 0, NOMBRE: 'Original' },
-      { ID: 1, NOMBRE: 'Editorial' },
-      { ID: 2, NOMBRE: 'Minimalista' },
-      { ID: 3, NOMBRE: 'Inmersivo' },
-      { ID: 4, NOMBRE: 'Revista' }
+      { ID: 1, NOMBRE: 'Editorial Lateral' },
+      { ID: 2, NOMBRE: 'Ficha Minimal' },
+      { ID: 3, NOMBRE: 'Cinemático' },
+      { ID: 4, NOMBRE: 'Revista Bento' },
+      { ID: 5, NOMBRE: 'Jardín Vivo' }
     ]
   },
 
