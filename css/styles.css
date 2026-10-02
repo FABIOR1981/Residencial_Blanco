@@ -6,18 +6,18 @@
    ============================================================ */
 :root {
     --hero-image: none;
-    --primary: #4A5D4E;
-    --primary-dark: #374439;
-    --accent: #D4A373;
-    --bg-light: #F9F8F6;
-    --text-main: #2C352D;
+    --primary: #78A6C8;
+    --primary-dark: #456B8C;
+    --accent: #D99B78;
+    --bg-light: #F3F8FC;
+    --text-main: #263B4D;
     --text-muted: #6B7280;
     --white: #FFFFFF;
     --font-heading: 'Playfair Display', serif;
     --font-body: 'Plus Jakarta Sans', sans-serif;
     --card-radius: 16px;
     --shadow: 0 10px 30px rgba(0,0,0,0.04);
-    --border-card: 1px solid rgba(74, 93, 78, 0.08);
+    --border-card: 1px solid rgba(69, 107, 140, 0.14);
 }
 
 :root {
@@ -113,7 +113,7 @@ nav a:hover {
 /* Hero Section */
 .hero {
     height: 100vh;
-    background: linear-gradient(rgba(44, 53, 45, 0.5), rgba(44, 53, 45, 0.6)), var(--hero-image) center/cover no-repeat;
+    background: linear-gradient(rgba(38, 59, 77, 0.5), rgba(38, 59, 77, 0.64)), var(--hero-image) center/cover no-repeat;
     display: flex;
     align-items: center;
     justify-content: center;

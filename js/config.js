@@ -17,11 +17,11 @@ const CONFIG = {
 
   // --- Apariencia editable de la marca ---
   TEMA: {
-    PRIMARIO: '#4A5D4E',
-    PRIMARIO_OSCURO: '#374439',
-    ACENTO: '#D4A373',
-    FONDO: '#F9F8F6',
-    TEXTO: '#2C352D',
+    PRIMARIO: '#78A6C8',
+    PRIMARIO_OSCURO: '#456B8C',
+    ACENTO: '#D99B78',
+    FONDO: '#F3F8FC',
+    TEXTO: '#263B4D',
     FUENTE_TITULOS: 'Playfair Display',
     FUENTE_TEXTO: 'Plus Jakarta Sans'
   },
