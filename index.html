@@ -38,13 +38,13 @@
         </div>
         <nav>
             <ul id="nav-list">
-                <li><a href="#inicio">Inicio</a></li>
-                <li><a href="#mision-vision">Nosotros</a></li>
-                <li><a href="#valores">Valores</a></li>
-                <li><a href="#servicios">Servicios</a></li>
-                <li><a href="#instalaciones">Instalaciones</a></li>
-                <li><a href="#galeria">Galería</a></li>
-                <li><a href="#contacto">Contacto</a></li>
+                <li><a href="#inicio" data-config-nav="0">Inicio</a></li>
+                <li><a href="#mision-vision" data-config-nav="1">Nosotros</a></li>
+                <li><a href="#valores" data-config-nav="2">Valores</a></li>
+                <li><a href="#servicios" data-config-nav="3">Servicios</a></li>
+                <li><a href="#instalaciones" data-config-nav="4">Instalaciones</a></li>
+                <li><a href="#galeria" data-config-nav="5">Galería</a></li>
+                <li><a href="#contacto" data-config-nav="6">Contacto</a></li>
             </ul>
         </nav>
     </header>
@@ -79,21 +79,7 @@
                     <div class="expandable-container" id="director-text-container">
                         <div class="expandable-content">
                             <p class="content-subtitle" data-config-text="COMPROMISO_DIRECTOR"></p>
-                            <p>Soy Licenciado en Enfermería y cuento con más de 20 años de experiencia en el ámbito de la salud, con una trayectoria especialmente vinculada a la salud mental y al cuidado de las personas.</p>
-                            
-                            <p>A lo largo de mi carrera he buscado ampliar permanentemente mi formación para brindar una atención responsable, humana y de calidad. Cuento con capacitación en geriatría, manejo y administración de medicamentos, RCP, lengua de señas y atención ante situaciones de crisis, entre otras áreas vinculadas al cuidado.</p>
-                            
-                            <p>También tuve la oportunidad de participar en misiones de paz de la Organización de las Naciones Unidas (ONU), una experiencia que enriqueció mi formación profesional y personal, fortaleciendo mis capacidades para trabajar en diferentes contextos y afrontar situaciones complejas.</p>
-                            
-                            <p>Mi formación incluye además gestión de riesgos, responsabilidad social empresarial y estrategias para la optimización del rol del acompañante y su integración en la vida cotidiana de las personas. He participado en jornadas y capacitaciones relacionadas con el adulto mayor, medicina defensiva y medicina asertiva, aspectos médico-toxicológicos vinculados al uso de sustancias psicoactivas y estrategias de intervención ante situaciones de crisis.</p>
-
-                            <p class="content-subtitle-spaced" data-config-text="POR_QUE"></p>
-                            <p>Después de tantos años trabajando en el ámbito de la salud, entiendo que cuidar no significa solamente atender una necesidad. Cuidar también es escuchar, respetar, acompañar y estar presente.</p>
-                            
-                            <p>Por eso nace este residencial: con la intención de crear un espacio donde cada persona pueda sentirse segura, valorada y acompañada, y donde las familias encuentren la tranquilidad de saber que sus seres queridos están en un entorno cálido y cuidado.</p>
-                            
-                            <p>Mi compromiso es trabajar junto a nuestro equipo para que este residencial sea mucho más que un lugar donde vivir: sea un hogar.<br>
-                            <strong data-config-text="BIENVENIDA"></strong></p>
+                            <div data-config-director-body></div>
                         </div>
                     </div>
                 </div>
@@ -107,7 +93,7 @@
             <div class="card-mv combined-mv">
                 <div>
                     <div class="mv-block">
-                        <h3><i class="fas fa-bullseye"></i> Nuestra Misión</h3>
+                        <h3><i class="fas fa-bullseye"></i> <span data-config-text="TITULO_MISION">Nuestra Misión</span></h3>
                         <p data-config-text="MISION"></p>
                     </div>
                     
@@ -127,36 +113,7 @@
     <section id="valores">
         <h2 class="section-title" data-config-text="TITULO_VALORES"></h2>
         <div class="values-grid">
-            <div class="value-item">
-                <i class="fas fa-heart"></i>
-                <h3>Calidez Humana</h3>
-                <p>Cuidamos desde la cercanía, el afecto y la escucha. Buscamos que cada residente se sienta acompañado, querido y contenido.</p>
-            </div>
-            <div class="value-item">
-                <i class="fas fa-hand-holding-heart"></i>
-                <h3>Respeto y Dignidad</h3>
-                <p>Reconocemos la historia, las preferencias, las costumbres y la individualidad de cada residente, promoviendo un trato digno.</p>
-            </div>
-            <div class="value-item">
-                <i class="fas fa-shield-alt"></i>
-                <h3>Seguridad y Confianza</h3>
-                <p>Trabajamos para ofrecer un entorno seguro, tranquilo y cuidado, generando confianza tanto en residentes como en sus familias.</p>
-            </div>
-            <div class="value-item">
-                <i class="fas fa-user-md"></i>
-                <h3>Profesionalismo</h3>
-                <p>Contamos con un equipo de profesionales capacitados y comprometidos para brindar una atención responsable, cercana y de calidad.</p>
-            </div>
-            <div class="value-item">
-                <i class="fas fa-smile"></i>
-                <h3>Bienestar y Calidad de Vida</h3>
-                <p>Promovemos una vida activa y confortable, respetando las posibilidades, necesidades y preferencias de cada residente.</p>
-            </div>
-            <div class="value-item">
-                <i class="fas fa-home"></i>
-                <h3>Sentido de Hogar</h3>
-                <p data-config-text="VALOR_HOGAR"></p>
-            </div>
+            <div id="valores-dinamicos"></div>
         </div>
     </section>
 
@@ -166,14 +123,14 @@
         <div class="services-container">
             
             <!-- Instalaciones y Comodidades -->
-            <div class="service-block">
+            <div class="service-block" data-config-service="INSTALACIONES">
                 <div>
-                    <h3><i class="fas fa-home"></i> Instalaciones</h3>
-                    <p data-config-text="INTRO_INSTALACIONES"></p>
+                    <h3><i class="fas fa-home"></i> <span data-config-service-title>Instalaciones</span></h3>
+                    <p data-config-service-intro></p>
                     
                     <div class="expandable-container" id="service-instalaciones">
                         <div class="expandable-content">
-                            <ul class="service-list" style="margin-top: 1rem;">
+                            <ul class="service-list" data-config-service-details style="margin-top: 1rem;">
                                 <li><strong>Habitaciones confortables:</strong> Habitaciones equipadas y calefaccionadas, preparadas para brindar comodidad, descanso y tranquilidad en un ambiente acogedor.</li>
                                 <li><strong>Accesibilidad:</strong> Contamos con espacios pensados para facilitar la movilidad, el desplazamiento y la autonomía de nuestros residentes.</li>
                                 <li><strong>Baños adaptados:</strong> Baños adaptados para brindar mayor seguridad, comodidad y facilidad de uso, contemplando las necesidades de cada persona.</li>
@@ -191,11 +148,11 @@
             </div>
             
             <!-- Alimentación -->
-            <div class="service-block service-fixed-height">
+            <div class="service-block service-fixed-height" data-config-service="ALIMENTACION">
                 <div>
-                    <h3><i class="fas fa-utensils"></i> Alimentación</h3>
-                    <p data-config-text="INTRO_ALIMENTACION"></p>
-                    <ul class="service-list">
+                    <h3><i class="fas fa-utensils"></i> <span data-config-service-title>Alimentación</span></h3>
+                    <p data-config-service-intro></p>
+                    <ul class="service-list" data-config-service-details>
                         <li><strong>Servicio completo:</strong> Contamos con desayuno, almuerzo, merienda, cena y colaciones, además de dietas especiales de acuerdo con las necesidades y requerimientos de cada persona.</li>
                         <li><strong>Sentido de hogar:</strong> Buscamos que cada comida sea también un momento agradable para compartir, disfrutar y sentirse como en casa.</li>
                     </ul>
@@ -203,14 +160,14 @@
             </div>
 
             <!-- Talleres y Actividades -->
-            <div class="service-block">
+            <div class="service-block" data-config-service="TALLERES">
                 <div>
-                    <h3><i class="fas fa-puzzle-piece"></i> Talleres y Actividades</h3>
-                    <p data-config-text="INTRO_TALLERES"></p>
+                    <h3><i class="fas fa-puzzle-piece"></i> <span data-config-service-title>Talleres y Actividades</span></h3>
+                    <p data-config-service-intro></p>
                     
                     <div class="expandable-container" id="service-talleres">
                         <div class="expandable-content">
-                            <ul class="service-list" style="margin-top: 1rem;">
+                            <ul class="service-list" data-config-service-details style="margin-top: 1rem;">
                                 <li><strong>Talleres recreativos:</strong> Actividades pensadas para estimular la participación, el entretenimiento y el vínculo con los demás.</li>
                                 <li><strong>Gimnasia funcional:</strong> Ejercicios adaptados que favorecen el movimiento, la movilidad y el mantenimiento de las capacidades físicas.</li>
                                 <li><strong>Manualidades y expresión:</strong> Espacios para desarrollar la creatividad, expresarse y disfrutar de actividades que estimulan las habilidades y la imaginación.</li>
@@ -226,15 +183,15 @@
             </div>
 
             <!-- Equipo y Enfermería -->
-            <div class="service-block">
+            <div class="service-block" data-config-service="ENFERMERIA">
                 <div>
-                    <h3><i class="fas fa-user-nurse"></i> Equipo, Enfermería</h3>
-                    <p data-config-text="INTRO_ENFERMERIA"></p>
+                    <h3><i class="fas fa-user-nurse"></i> <span data-config-service-title>Equipo, Enfermería</span></h3>
+                    <p data-config-service-intro></p>
                     
                     <div class="expandable-container" id="service-enfermeria">
                         <div class="expandable-content">
                             <p style="margin-bottom: 1rem;">Nuestro trabajo incluye:</p>
-                            <ul class="service-list">
+                            <ul class="service-list" data-config-service-details>
                                 <li><strong>Administración:</strong> Control de stock y administración de la medicación, de acuerdo con las indicaciones correspondientes.</li>
                                 <li><strong>Control continuo:</strong> Seguimiento diario del estado y las necesidades de cada residente.</li>
                                 <li><strong>Comunicación:</strong> Coordinación con profesionales de la salud y referentes familiares cuando corresponde.</li>
@@ -258,10 +215,10 @@
         <h2 class="section-title" data-config-text="TITULO_INSTALACIONES"></h2>
         
         <div class="gallery-filters">
-            <button class="filter-btn active" data-filter="all">Todas</button>
-            <button class="filter-btn" data-filter="exterior">Exterior</button>
-            <button class="filter-btn" data-filter="interior">Áreas Comunes</button>
-            <button class="filter-btn" data-filter="habitacion">Habitaciones</button>
+            <button class="filter-btn active" data-filter="all" data-config-filter="0">Todas</button>
+            <button class="filter-btn" data-filter="exterior" data-config-filter="1">Exterior</button>
+            <button class="filter-btn" data-filter="interior" data-config-filter="2">Áreas Comunes</button>
+            <button class="filter-btn" data-filter="habitacion" data-config-filter="3">Habitaciones</button>
         </div>
 
         <div class="gallery-grid" id="instalaciones-dinamicas">

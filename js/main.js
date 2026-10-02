@@ -64,7 +64,60 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    function aplicarContenidosMarca() {
+        const valores = document.getElementById('valores-dinamicos');
+        if (valores && Array.isArray(cfgTextos.VALORES)) {
+            const iconosValores = ['fa-heart', 'fa-hand-holding-heart', 'fa-shield-alt', 'fa-user-md', 'fa-smile', 'fa-home'];
+            valores.innerHTML = cfgTextos.VALORES.map((valor, indice) => `
+                <div class="value-item">
+                    <i class="fas ${iconosValores[indice] || 'fa-star'}"></i>
+                    <h3>${escaparHtml(valor[0])}</h3>
+                    <p>${escaparHtml(valor[1])}</p>
+                </div>
+            `).join('');
+        }
+
+        document.querySelectorAll('[data-config-nav]').forEach(enlace => {
+            const indice = Number(enlace.dataset.configNav);
+            if (cfgTextos.NAVEGACION?.[indice] !== undefined) enlace.textContent = cfgTextos.NAVEGACION[indice];
+        });
+
+        const director = document.querySelector('[data-config-director-body]');
+        if (director && Array.isArray(cfgTextos.TEXTO_DIRECTOR)) {
+            const textosDirector = cfgTextos.TEXTO_DIRECTOR.map(texto => escaparHtml(resolverTexto(texto)));
+            const cuerpoDirector = textosDirector.map((texto, indice) => {
+                const subtitulo = indice === 4
+                    ? `<p class="content-subtitle-spaced">${escaparHtml(resolverTexto(cfgTextos.POR_QUE || ''))}</p>`
+                    : '';
+                const cierre = indice === textosDirector.length - 1
+                    ? `<br><strong>${escaparHtml(resolverTexto(cfgTextos.BIENVENIDA || ''))}</strong>`
+                    : '';
+                return `${subtitulo}<p>${texto}${cierre}</p>`;
+            }).join('');
+            director.innerHTML = cuerpoDirector;
+        }
+
+        document.querySelectorAll('[data-config-service]').forEach(bloque => {
+            const clave = bloque.dataset.configService;
+            const servicio = cfgTextos.SERVICIOS?.[clave];
+            if (!servicio) return;
+
+            const titulo = bloque.querySelector('[data-config-service-title]');
+            const introduccion = bloque.querySelector('[data-config-service-intro]');
+            const detalles = bloque.querySelector('[data-config-service-details]');
+            if (titulo) titulo.textContent = servicio.TITULO;
+            if (introduccion) introduccion.textContent = servicio.INTRO;
+            if (detalles) detalles.innerHTML = servicio.DETALLE;
+        });
+
+        document.querySelectorAll('[data-config-filter]').forEach(boton => {
+            const indice = Number(boton.dataset.configFilter);
+            if (cfgTextos.FILTROS_INSTALACIONES?.[indice] !== undefined) boton.textContent = cfgTextos.FILTROS_INSTALACIONES[indice];
+        });
+    }
+
     aplicarConfiguracion();
+    aplicarContenidosMarca();
 
     // 1. Menú Responsive Móvil
     const mobileMenu = document.getElementById('mobile-menu');
