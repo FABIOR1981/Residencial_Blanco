@@ -56,7 +56,8 @@ El logo y la imagen del director también se cargan mediante URLs directas confi
 ├── index.html       # Estructura de la página
 ├── js/config.js     # Único archivo de personalización
 ├── js/main.js       # Configuración dinámica, Cloudinary e interacciones
-├── css/styles.css   # Estilos y variables visuales
+├── css/styles.css   # Base visual y estilo 0 - Original
+├── css/ui-styles.css # Estilos consolidados de los formatos 1 a 5
 ├── img/             # Recursos locales auxiliares
 ├── netlify.toml     # Configuración opcional de Netlify
 └── readme.md

@@ -672,6 +672,8 @@ footer {
     }
 }
 
+@media not all {
+
 /* ============================================================
    COMPOSICIONES DIFERENCIADAS
    Estas reglas redefinen la estructura visual, no solo la paleta.
@@ -1886,16 +1888,16 @@ body[data-ui-style="5"] .whatsapp-float {
 
 /* 5. Jardín Vivo: recorrido cálido, orgánico y centrado en el bienestar. */
 body[data-ui-style="5"] {
-    --primary: #557468;
-    --primary-dark: #304d45;
-    --accent: #d88d68;
-    --bg-light: #f5f1e8;
-    --text-main: #2c3d3a;
-    --text-muted: #687873;
-    --white: #fffdf8;
+    --primary: #765985;
+    --primary-dark: #4c385b;
+    --accent: #ed927d;
+    --bg-light: #fff3eb;
+    --text-main: #3e3445;
+    --text-muted: #766b79;
+    --white: #fffdfb;
     --card-radius: 24px;
-    --border-card: 1px solid rgba(85, 116, 104, 0.15);
-    --shadow: 0 16px 40px rgba(65, 84, 75, 0.1);
+    --border-card: 1px solid rgba(118, 89, 133, 0.16);
+    --shadow: 0 16px 40px rgba(118, 89, 133, 0.12);
     background: var(--bg-light);
 }
 
@@ -1903,9 +1905,9 @@ body[data-ui-style="5"] header {
     position: sticky;
     top: 0;
     min-height: 88px;
-    background: rgba(255, 253, 248, 0.88);
+    background: rgba(255, 253, 251, 0.94);
     backdrop-filter: blur(16px);
-    box-shadow: 0 4px 20px rgba(65, 84, 75, 0.08);
+    box-shadow: 0 4px 20px rgba(118, 89, 133, 0.1);
     z-index: 1000;
 }
 
@@ -1921,7 +1923,7 @@ body[data-ui-style="5"] .hero {
     justify-content: flex-start;
     text-align: left;
     padding: 8rem 8% 8rem;
-    background: linear-gradient(90deg, var(--bg-light) 0 50%, rgba(245, 241, 232, 0.1) 50%), var(--hero-image) right center/52% 100% no-repeat;
+    background: linear-gradient(90deg, var(--bg-light) 0 50%, rgba(255, 243, 235, 0.08) 50%), var(--hero-image) right center/52% 100% no-repeat;
     color: var(--text-main);
 }
 
@@ -1957,7 +1959,7 @@ body[data-ui-style="5"] section {
 }
 
 body[data-ui-style="5"] #mision-vision {
-    background: #fffdf8;
+    background: #fffdfb;
 }
 
 body[data-ui-style="5"] #mision-vision .about-grid {
@@ -1983,7 +1985,7 @@ body[data-ui-style="5"] .combined-mv {
 }
 
 body[data-ui-style="5"] #valores {
-    background: #e5eee8;
+    background: #eee5f2;
 }
 
 body[data-ui-style="5"] #valores .values-grid {
@@ -1997,7 +1999,7 @@ body[data-ui-style="5"] #valores .value-item {
 }
 
 body[data-ui-style="5"] #servicios {
-    background: #fffdf8 !important;
+    background: #fffdfb !important;
 }
 
 body[data-ui-style="5"] #servicios .services-container {
@@ -2014,7 +2016,7 @@ body[data-ui-style="5"] #servicios .service-block {
 
 body[data-ui-style="5"] #servicios .service-block:first-child {
     grid-column: span 3;
-    background: #dce9e0;
+    background: #eadcf0;
 }
 
 body[data-ui-style="5"] #servicios .service-block:last-child {
@@ -2024,7 +2026,7 @@ body[data-ui-style="5"] #servicios .service-block:last-child {
 
 body[data-ui-style="5"] #instalaciones,
 body[data-ui-style="5"] #galeria {
-    background: #f5f1e8;
+    background: #fff3eb;
 }
 
 body[data-ui-style="5"] #instalaciones .gallery-grid,
@@ -2050,18 +2052,18 @@ body[data-ui-style="5"] .gallery-item:nth-child(1) {
 }
 
 body[data-ui-style="5"] #contacto {
-    background: #304d45;
-    color: #fffdf8;
+    background: #765985;
+    color: #fffdfb;
 }
 
 body[data-ui-style="5"] #contacto .section-title,
 body[data-ui-style="5"] #contacto .contact-content,
 body[data-ui-style="5"] #contacto strong {
-    color: #fffdf8;
+    color: #fffdfb;
 }
 
 body[data-ui-style="5"] footer {
-    background: #243a35;
+    background: #4c385b;
 }
 
 @media (max-width: 900px) {
@@ -2082,12 +2084,12 @@ body[data-ui-style="5"] footer {
     body[data-ui-style="5"] .hero {
         min-height: 620px;
         padding: 8rem 7% 4rem;
-        background: linear-gradient(180deg, rgba(245, 241, 232, 0.2), rgba(245, 241, 232, 0.85)), var(--hero-image) center/cover no-repeat;
+        background: linear-gradient(180deg, rgba(255, 243, 235, 0.2), rgba(255, 243, 235, 0.85)), var(--hero-image) center/cover no-repeat;
     }
 
     body[data-ui-style="5"] .hero-content {
         padding: 1.5rem;
-        background: rgba(255, 253, 248, 0.9);
+        background: rgba(255, 253, 251, 0.9);
         border-radius: 24px 6px 24px 6px;
     }
 
@@ -2585,4 +2587,6 @@ body[data-ui-style="4"] .service-block:nth-child(3) {
     body[data-ui-style="4"] .hero-content h1 {
         font-size: clamp(2.7rem, 13vw, 4.8rem);
     }
+}
+
 }
