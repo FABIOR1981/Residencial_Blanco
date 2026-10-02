@@ -35,7 +35,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         document.querySelectorAll('[data-config-brand-attr]').forEach(elemento => {
             const [atributo, clave] = elemento.dataset.configBrandAttr.split(':');
-            if (cfgMarca[clave] !== undefined && !['LOGO', 'IMAGEN_DIRECTOR'].includes(clave)) {
+            if (cfgMarca[clave] !== undefined) {
                 elemento.setAttribute(atributo, resolverTexto(cfgMarca[clave]));
             }
         });
