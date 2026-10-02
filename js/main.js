@@ -198,6 +198,20 @@ document.addEventListener('DOMContentLoaded', () => {
         return orden && !isNaN(orden) ? parseInt(orden, 10) : 99;
     }
 
+    // Numera (1 a 6, en ciclo) las imágenes visibles de una grilla; los formatos tipo mosaico usan data-pos
+    function marcarPosiciones(grilla) {
+        if (!grilla) return;
+        let n = 0;
+        grilla.querySelectorAll('.gallery-item').forEach(item => {
+            if (item.style.display === 'none') {
+                item.removeAttribute('data-pos');
+            } else {
+                item.setAttribute('data-pos', String((n % 6) + 1));
+                n++;
+            }
+        });
+    }
+
     // 2. Cargar Instalaciones Dinámicas desde Cloudinary (con orden y filtros automáticos)
     const instalacionesDinamicas = document.getElementById('instalaciones-dinamicas');
     const contenedorFiltros = document.getElementById('instalaciones-filtros');
@@ -258,6 +272,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 }).join('');
                 
                 instalacionesDinamicas.innerHTML = htmlInstalaciones;
+                marcarPosiciones(instalacionesDinamicas);
                 
                 inicializarFiltrosInstalaciones();
                 inicializarLightbox();
@@ -287,6 +302,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 const visible = filtro === 'all' || item.getAttribute('data-category') === filtro;
                 item.style.display = visible ? '' : 'none';
             });
+            marcarPosiciones(document.getElementById('instalaciones-dinamicas'));
         });
     }
 
@@ -325,6 +341,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 }).join('');
                 
                 galeriaDinamica.innerHTML = htmlImagenes;
+                marcarPosiciones(galeriaDinamica);
                 inicializarLightbox();
             })
             .catch(error => {
