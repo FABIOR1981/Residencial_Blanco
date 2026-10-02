@@ -106,8 +106,7 @@ const CONFIG = {
     CARPETA_BASE: 'en_Blanco/Residencial',        // Carpeta raíz para las imágenes subidas
     CARPETA_DEFAULT: 'galeria',     // Subcarpeta seleccionada por defecto
     TAG_GALERIA: 'enBlanco_residencial_galeria',  // Etiqueta que llevan las fotos de la galería
-    TAG_INSTALACIONES: 'enBlanco_residencial_instalaciones' ,
-    TAG_PERSONAL: 'enBlanco_residencial_personal'// Etiqueta que llevan las fotos de instalaciones en Cloudinary
+    TAG_INSTALACIONES: 'enBlanco_residencial_instalaciones' // Etiqueta que llevan las fotos de instalaciones en Cloudinary
   },
 
   // --- Contacto y redes ---

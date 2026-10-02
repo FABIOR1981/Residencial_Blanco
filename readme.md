@@ -1,43 +1,70 @@
-# Plantilla de residencial marca blanca
+# Plantilla de marca blanca
 
-Sitio web estático de Residencial Monarca, un residencial geriátrico que presenta su propuesta de cuidado, servicios, instalaciones y formas de contacto para residentes y sus familias.
+Sitio web estático adaptable para una institución o residencial. La identidad, los textos, los recursos visuales, el contacto y Cloudinary se administran desde un único archivo de configuración.
 
 ## Personalización
 
-Toda la identidad, los textos, las imágenes, el contacto, las redes sociales y la configuración de Cloudinary se editan en `js/config.js`. La plantilla no requiere modificar `index.html`, `js/main.js` ni `css/styles.css` para adaptarla a otro residencial.
+Editar [`js/config.js`](js/config.js). No es necesario modificar `index.html`, `js/main.js` ni `css/styles.css` para cambiar la marca.
 
-## Funcionalidades
+### Identidad y apariencia
 
-- Página de inicio responsive con navegación por secciones.
-- Presentación institucional, misión, visión y valores.
-- Perfil de dirección con contenido expandible.
-- Sección de servicios con información sobre instalaciones, alimentación, talleres y equipo de enfermería.
-- Galería fija de instalaciones organizada por categorías.
-- Galería dinámica de actividades cargada desde `galeria.json`.
-- Filtros de galería y visor ampliado de imágenes mediante lightbox.
-- Gestor local para preparar y optimizar imágenes antes de incorporarlas al sitio.
-- Enlaces de contacto, ubicación y redes sociales.
+En `MARCA` se configuran el nombre, título, descripción, logo, imagen del director y portada principal. `IMAGEN_HERO` usa una URL directa de Cloudinary porque es una imagen única de fondo.
 
-## Estructura del proyecto
+En `TEMA` se configuran colores y familias tipográficas.
+
+### Contenido
+
+En `TEXTOS` se configuran:
+
+- Navegación y filtros.
+- Lema, textos del hero y títulos de secciones.
+- Biografía y datos del director.
+- Misión, visión y valores.
+- Títulos, introducciones y detalles de servicios.
+- Textos de galería, contacto y botones.
+
+### Contacto
+
+En `CONTACTO` se configuran dirección, teléfono de WhatsApp, Instagram y Facebook.
+
+## Cloudinary
+
+La configuración se encuentra en `CONFIG.CLOUDINARY`:
+
+```javascript
+CLOUD_NAME: 'p0qlmlor',
+UPLOAD_PRESET: 'subir_gestor',
+CARPETA_BASE: 'en_Blanco/Residencial',
+CARPETA_DEFAULT: 'galeria',
+TAG_GALERIA: 'enBlanco_residencial_galeria',
+TAG_INSTALACIONES: 'enBlanco_residencial_instalaciones'
+```
+
+El sitio utiliza estas etiquetas para consultar las listas públicas de Cloudinary:
+
+- `TAG_GALERIA`: imágenes de la galería de actividades.
+- `TAG_INSTALACIONES`: imágenes de instalaciones y filtros por área.
+Las imágenes deben estar etiquetadas exactamente con esos valores. Cloudinary debe tener disponible el endpoint público `image/list` para que las consultas funcionen.
+
+La fachada del hero no se busca por tag: se carga directamente mediante `MARCA.IMAGEN_HERO`.
+El logo y la imagen del director también se cargan mediante URLs directas configuradas en `MARCA.LOGO` y `MARCA.IMAGEN_DIRECTOR`.
+
+## Estructura
 
 ```text
 .
-├── index.html             # Página principal
-├── gestor_imagenes.html   # Herramienta local de gestión de imágenes
-├── generate-gallery.js    # Genera galeria.json desde img/galeria
-├── css/styles.css         # Estilos del sitio
-├── js/main.js             # Menú, filtros, lightbox y galería dinámica
-├── img/
-│   ├── instalaciones/    # Imágenes fijas de las instalaciones
-│   ├── galeria/           # Imágenes usadas por la galería dinámica
-│   └── director.png       # Imagen del perfil de dirección
-├── netlify.toml           # Configuración de publicación en Netlify
-└── README.md
+├── index.html       # Estructura de la página
+├── js/config.js     # Único archivo de personalización
+├── js/main.js       # Configuración dinámica, Cloudinary e interacciones
+├── css/styles.css   # Estilos y variables visuales
+├── img/             # Recursos locales auxiliares
+├── netlify.toml     # Configuración opcional de Netlify
+└── readme.md
 ```
 
 ## Ejecución local
 
-El sitio no necesita un proceso de compilación. Como la galería dinámica carga un archivo JSON, es recomendable usar un servidor HTTP local en lugar de abrir `index.html` directamente.
+No requiere compilación. Conviene utilizar un servidor HTTP local para que funcionen correctamente las consultas a Cloudinary.
 
 Con Node.js:
 
@@ -51,30 +78,16 @@ O con Python:
 python -m http.server 8000
 ```
 
-Después, abre la URL indicada por el servidor, normalmente `http://localhost:8000`.
-
-## Actualizar la galería dinámica
-
-1. Coloca las imágenes de actividades en `img/galeria/`.
-2. Ejecuta el generador desde la raíz del proyecto:
-
-```bash
-node generate-gallery.js
-```
-
-3. Comprueba que se haya creado o actualizado `galeria.json`.
-4. Recarga el sitio servido localmente.
-
-El generador incluye archivos con extensión `.jpg`, `.jpeg`, `.png`, `.gif` y `.webp`.
+Luego abrir `http://localhost:8000` o la dirección indicada por el servidor.
 
 ## Tecnologías
 
 - HTML5, CSS3 y JavaScript vanilla.
-- Node.js únicamente para generar el índice de la galería.
-- Google Fonts: Playfair Display y Plus Jakarta Sans.
-- Font Awesome 6.4.0 mediante CDN.
-- Netlify como opción de despliegue estático.
+- Cloudinary para imágenes y galerías dinámicas.
+- Google Fonts mediante CDN.
+- Font Awesome mediante CDN.
+- Netlify como opción de publicación.
 
 ## Publicación
 
-El proyecto puede publicarse en Netlify o en cualquier servicio que sirva archivos estáticos. No requiere backend ni base de datos. Antes de publicar, conviene verificar que los enlaces de WhatsApp, redes sociales y ubicación correspondan a los datos definitivos de la residencia.
+El proyecto puede publicarse en Netlify o en cualquier servidor de archivos estáticos. Antes de publicar, verificar los valores de `MARCA`, `CONTACTO` y `CLOUDINARY` en `js/config.js`, además de que las etiquetas de Cloudinary sean públicas y coincidan exactamente.
