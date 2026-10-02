@@ -105,8 +105,8 @@ const CONFIG = {
     UPLOAD_PRESET: 'subir_gestor',    // Preset unsigned de subida de Cloudinary
     CARPETA_BASE: 'en_Blanco/Residencial',        // Carpeta raíz para las imágenes subidas
     CARPETA_DEFAULT: 'galeria',     // Subcarpeta seleccionada por defecto
-    TAG_GALERIA: 'galeria_general',  // Etiqueta que llevan las fotos de la galería
-    TAG_INSTALACIONES: 'instalaciones' // Etiqueta que llevan las fotos de instalaciones en Cloudinary
+    TAG_GALERIA: 'enBlanco_residencial_galeria',  // Etiqueta que llevan las fotos de la galería
+    TAG_INSTALACIONES: 'enBlanco_residencial_instalaciones' // Etiqueta que llevan las fotos de instalaciones en Cloudinary
   },
 
   // --- Contacto y redes ---
