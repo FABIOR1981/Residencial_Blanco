@@ -1714,6 +1714,123 @@ body[data-ui-style="5"] footer {
     background: #35263f;
 }
 
+/* Corrección visual de Revista Bento: portada dividida, imagen limpia y visible. */
+body[data-ui-style="4"] .hero {
+    min-height: 680px;
+    padding: 7rem 8%;
+    align-items: center;
+    background: #fff4e8;
+    color: var(--text-main);
+    position: relative;
+}
+
+body[data-ui-style="4"] .hero::after {
+    content: '';
+    position: absolute;
+    inset: 0 0 0 52%;
+    background: var(--hero-image) center/cover no-repeat;
+    z-index: 0;
+}
+
+body[data-ui-style="4"] .hero-content {
+    position: relative;
+    z-index: 1;
+    width: min(48%, 650px);
+    max-width: none;
+    padding: 0 3rem 0 0;
+    background: transparent;
+    border-left: 0;
+    box-shadow: none;
+}
+
+body[data-ui-style="4"] .hero-content h1 {
+    color: #1d3043;
+    font-size: clamp(3.2rem, 6vw, 6.8rem);
+    line-height: 0.9;
+}
+
+body[data-ui-style="4"] .hero-content h2,
+body[data-ui-style="4"] .hero-content p {
+    color: #293746;
+}
+
+body[data-ui-style="4"] .hero-content .btn {
+    background: #ef755f;
+    color: #fffdf9;
+}
+
+/* Corrección de Jardín Vivo: paleta completamente libre de verdes. */
+body[data-ui-style="5"] {
+    --primary: #765985;
+    --primary-dark: #4c385b;
+    --accent: #ed927d;
+    --bg-light: #fff3eb;
+    --text-main: #3e3445;
+    --text-muted: #766b79;
+    --white: #fffdfb;
+}
+
+body[data-ui-style="5"] header {
+    background: rgba(255, 253, 251, 0.94);
+    border-bottom: 1px solid rgba(118, 89, 133, 0.16);
+}
+
+body[data-ui-style="5"] #mision-vision,
+body[data-ui-style="5"] #servicios {
+    background: #fffdfb !important;
+}
+
+body[data-ui-style="5"] #valores {
+    background: #eee5f2;
+}
+
+body[data-ui-style="5"] #servicios .service-block,
+body[data-ui-style="5"] #servicios .service-block:first-child,
+body[data-ui-style="5"] #servicios .service-block:last-child {
+    background: #f8e6df;
+}
+
+body[data-ui-style="5"] #servicios .service-block:nth-child(2) {
+    background: #e9e0f0;
+}
+
+body[data-ui-style="5"] #servicios .service-block:nth-child(3) {
+    background: #f6d8d2;
+}
+
+body[data-ui-style="5"] #instalaciones,
+body[data-ui-style="5"] #galeria {
+    background: #fff3eb;
+}
+
+body[data-ui-style="5"] #contacto {
+    background: #765985;
+}
+
+body[data-ui-style="5"] footer {
+    background: #4c385b;
+}
+
+@media (max-width: 700px) {
+    body[data-ui-style="4"] .hero {
+        min-height: 700px;
+        padding: 5rem 7% 3rem;
+        align-items: flex-end;
+        background: #fff4e8;
+    }
+
+    body[data-ui-style="4"] .hero::after {
+        inset: 0 0 42% 0;
+    }
+
+    body[data-ui-style="4"] .hero-content {
+        width: 100%;
+        padding: 1.5rem;
+        background: #fffdf9;
+        box-shadow: 0 12px 30px rgba(49, 80, 107, 0.14);
+    }
+}
+
 /* 5. Jardín Vivo: recorrido cálido, orgánico y centrado en el bienestar. */
 body[data-ui-style="5"] {
     --primary: #557468;
