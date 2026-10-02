@@ -1,5 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;800&display=swap');
+
 /* 5. JARDÍN VIVO: formas suaves, pasteles, mosaico orgánico */
 body[data-ui-style="5"] {
+    --font-heading: 'Nunito', sans-serif;
+    --font-body: 'Nunito', sans-serif;
     --primary: #765985;
     --primary-dark: #4c385b;
     --accent: #ed927d;

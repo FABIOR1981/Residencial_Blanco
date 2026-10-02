@@ -1,5 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap');
+
 /* 2. FICHA MINIMAL: líneas finas, sin sombras, lectura rápida */
 body[data-ui-style="2"] {
+    --font-heading: 'DM Sans', sans-serif;
+    --font-body: 'DM Sans', sans-serif;
     --primary: #287c82;
     --primary-dark: #18555b;
     --accent: #e78b55;
@@ -54,7 +58,8 @@ body[data-ui-style="2"] .hero-content {
 body[data-ui-style="2"] .hero-content h1 {
     color: var(--primary-dark);
     font-size: clamp(2.6rem, 5vw, 4.2rem);
-    letter-spacing: 0;
+    font-weight: 700;
+    letter-spacing: -0.03em;
     line-height: 1.1;
 }
 
