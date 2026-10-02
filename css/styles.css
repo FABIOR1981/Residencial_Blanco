@@ -1811,6 +1811,59 @@ body[data-ui-style="5"] footer {
     background: #4c385b;
 }
 
+body[data-ui-style="5"] .btn,
+body[data-ui-style="5"] .btn-leer-mas,
+body[data-ui-style="5"] .filter-btn.active,
+body[data-ui-style="5"] .filter-btn:hover {
+    background: #ed927d;
+    border-color: #ed927d;
+    color: #fffdfb;
+}
+
+body[data-ui-style="5"] .section-title,
+body[data-ui-style="5"] .section-title::after,
+body[data-ui-style="5"] .value-item i,
+body[data-ui-style="5"] .service-block h3,
+body[data-ui-style="5"] .director-header h3,
+body[data-ui-style="5"] .content-subtitle,
+body[data-ui-style="5"] .content-subtitle-spaced,
+body[data-ui-style="5"] .mv-block h3 {
+    color: #765985;
+}
+
+body[data-ui-style="5"] .section-title::after {
+    background: #ed927d;
+}
+
+body[data-ui-style="5"] .card-director,
+body[data-ui-style="5"] .combined-mv,
+body[data-ui-style="5"] .service-block,
+body[data-ui-style="5"] .value-item,
+body[data-ui-style="5"] .gallery-item {
+    border-color: rgba(118, 89, 133, 0.2);
+}
+
+body[data-ui-style="5"] .service-block h3 i,
+body[data-ui-style="5"] .filter-btn {
+    background: #eee5f2;
+    border-color: #765985;
+    color: #765985;
+}
+
+body[data-ui-style="5"] .social-icons a {
+    background: #ed927d;
+    color: #fffdfb;
+}
+
+body[data-ui-style="5"] .social-icons a:hover,
+body[data-ui-style="5"] .whatsapp-float:hover {
+    background: #d97869;
+}
+
+body[data-ui-style="5"] .whatsapp-float {
+    background: #765985;
+}
+
 @media (max-width: 700px) {
     body[data-ui-style="4"] .hero {
         min-height: 700px;
