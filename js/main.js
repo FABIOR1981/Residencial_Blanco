@@ -2,6 +2,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const cfgMarca = (typeof CONFIG !== 'undefined' && CONFIG.MARCA) ? CONFIG.MARCA : {};
     const cfgTextos = (typeof CONFIG !== 'undefined' && CONFIG.TEXTOS) ? CONFIG.TEXTOS : {};
     const cfgTema = (typeof CONFIG !== 'undefined' && CONFIG.TEMA) ? CONFIG.TEMA : {};
+    const cfgUI = (typeof CONFIG !== 'undefined' && CONFIG.UI) ? CONFIG.UI : {};
 
     function resolverTexto(texto) {
         return String(texto).replace(/\{([^}]+)\}/g, (_, clave) => {
@@ -66,6 +67,25 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    function aplicarFormatoInterfaz(estilo) {
+        const estilosDisponibles = Array.isArray(cfgUI.OPCIONES) ? cfgUI.OPCIONES : [];
+        const estiloValido = estilosDisponibles.some(opcion => Number(opcion.ID) === Number(estilo)) ? Number(estilo) : 0;
+        document.body.dataset.uiStyle = estiloValido;
+
+        const selector = document.getElementById('ui-style-selector');
+        if (!selector) return;
+
+        selector.innerHTML = estilosDisponibles.map(opcion =>
+            `<option value="${opcion.ID}">${escaparHtml(opcion.NOMBRE)}</option>`
+        ).join('');
+        selector.value = String(estiloValido);
+        selector.closest('.ui-style-control').hidden = cfgUI.MOSTRAR_SELECTOR === false;
+        selector.onchange = () => {
+            aplicarFormatoInterfaz(selector.value);
+            window.localStorage.setItem('residencial-ui-style', selector.value);
+        };
+    }
+
     function aplicarContenidosMarca() {
         const valores = document.getElementById('valores-dinamicos');
         if (valores && Array.isArray(cfgTextos.VALORES)) {
@@ -120,6 +140,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     aplicarConfiguracion();
     aplicarContenidosMarca();
+    aplicarFormatoInterfaz(window.localStorage.getItem('residencial-ui-style') ?? cfgUI.ESTILO ?? 0);
 
     // 1. Menú Responsive Móvil
     const mobileMenu = document.getElementById('mobile-menu');

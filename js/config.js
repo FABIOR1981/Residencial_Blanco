@@ -26,6 +26,19 @@ const CONFIG = {
     FUENTE_TEXTO: 'Plus Jakarta Sans'
   },
 
+  // --- Formato de interfaz ---
+  UI: {
+    ESTILO: 0,
+    MOSTRAR_SELECTOR: true,
+    OPCIONES: [
+      { ID: 0, NOMBRE: 'Original' },
+      { ID: 1, NOMBRE: 'Editorial' },
+      { ID: 2, NOMBRE: 'Minimalista' },
+      { ID: 3, NOMBRE: 'Inmersivo' },
+      { ID: 4, NOMBRE: 'Revista' }
+    ]
+  },
+
 // --- Textos editables del sitio ---
   TEXTOS: {
     LEMA: '“Innovación y compromiso en cada solución”',
