@@ -1,0 +1,151 @@
+/* 4. REVISTA BENTO: piezas de distinto tamaño, portada dividida */
+body[data-ui-style="4"] {
+    --primary: #31506b;
+    --primary-dark: #1d3043;
+    --accent: #ef755f;
+    --bg-light: #fff4e8;
+    --text-main: #293746;
+    --text-muted: #687582;
+    --white: #fffdf9;
+    --card-radius: 20px;
+    --shadow: 0 12px 30px rgba(41, 55, 70, 0.08);
+    --border-card: 1px solid rgba(49, 80, 107, 0.12);
+}
+
+body[data-ui-style="4"] header {
+    background: var(--white);
+}
+
+body[data-ui-style="4"] section {
+    padding: 5.5rem 8% 4.5rem;
+}
+
+body[data-ui-style="4"] .hero {
+    height: auto;
+    min-height: min(90vh, 740px);
+    justify-content: flex-start;
+    padding: 8rem 8% 5rem;
+    text-align: left;
+    color: var(--text-main);
+    background: linear-gradient(90deg, var(--bg-light) 0 50%, rgba(255, 244, 232, 0) 50%), var(--hero-image) center/cover no-repeat;
+}
+
+body[data-ui-style="4"] .hero-content {
+    max-width: min(520px, 45%);
+}
+
+body[data-ui-style="4"] .hero-content h1 {
+    color: var(--primary-dark);
+    font-size: clamp(2.6rem, 5vw, 4.4rem);
+    letter-spacing: 0;
+    line-height: 1.08;
+}
+
+body[data-ui-style="4"] .hero-content h2 {
+    color: var(--primary);
+}
+
+body[data-ui-style="4"] .hero-content p {
+    margin-left: 0;
+}
+
+body[data-ui-style="4"] .btn {
+    background: var(--accent);
+    color: var(--primary-dark);
+}
+
+body[data-ui-style="4"] .about-grid {
+    grid-template-columns: 1.15fr 0.85fr;
+}
+
+body[data-ui-style="4"] .values-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+body[data-ui-style="4"] .services-container {
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+    gap: 1.25rem;
+    padding: 0;
+}
+
+body[data-ui-style="4"] .service-block {
+    grid-column: span 3;
+    padding: 2.25rem 2rem;
+    border-top: 5px solid var(--accent);
+}
+
+body[data-ui-style="4"] .service-block:nth-child(4n + 1),
+body[data-ui-style="4"] .service-block:nth-child(4n + 4) {
+    grid-column: span 4;
+}
+
+body[data-ui-style="4"] .service-block:nth-child(4n + 2),
+body[data-ui-style="4"] .service-block:nth-child(4n + 3) {
+    grid-column: span 2;
+}
+
+body[data-ui-style="4"] .service-block:nth-child(4n + 2) {
+    --card-bg: #ffe3d6;
+    background: var(--card-bg);
+}
+
+body[data-ui-style="4"] .service-block:nth-child(4n + 3) {
+    --card-bg: #e3ecf4;
+    background: var(--card-bg);
+}
+
+body[data-ui-style="4"] .gallery-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-auto-rows: 220px;
+    gap: 1rem;
+}
+
+body[data-ui-style="4"] .gallery-item {
+    aspect-ratio: auto;
+}
+
+body[data-ui-style="4"] .gallery-item[data-pos="1"] {
+    grid-column: span 2;
+    grid-row: span 2;
+}
+
+@media (max-width: 980px) {
+    body[data-ui-style="4"] .about-grid {
+        grid-template-columns: 1fr;
+    }
+
+    body[data-ui-style="4"] .values-grid,
+    body[data-ui-style="4"] .services-container {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    body[data-ui-style="4"] .service-block,
+    body[data-ui-style="4"] .service-block:nth-child(n) {
+        grid-column: auto;
+    }
+
+    body[data-ui-style="4"] .hero {
+        background: linear-gradient(rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.9)), var(--hero-image) center/cover no-repeat;
+    }
+
+    body[data-ui-style="4"] .hero-content {
+        max-width: 100%;
+    }
+}
+
+@media (max-width: 768px) {
+    body[data-ui-style="4"] .values-grid,
+    body[data-ui-style="4"] .services-container {
+        grid-template-columns: 1fr;
+    }
+
+    body[data-ui-style="4"] .gallery-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        grid-auto-rows: 160px;
+    }
+
+    body[data-ui-style="4"] .gallery-item[data-pos="1"] {
+        grid-column: span 2;
+        grid-row: span 1;
+    }
+}

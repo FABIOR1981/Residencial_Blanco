@@ -1,0 +1,106 @@
+/* Base común de los formatos 1 al 5. Se carga solo si el formato activo no es el 0. */
+
+body[data-ui-style] {
+    overflow-x: hidden;
+}
+
+body[data-ui-style] section {
+    scroll-margin-top: 84px;
+}
+
+body[data-ui-style] h1,
+body[data-ui-style] h2,
+body[data-ui-style] h3,
+body[data-ui-style] h4,
+body[data-ui-style] p,
+body[data-ui-style] li,
+body[data-ui-style] a,
+body[data-ui-style] button,
+body[data-ui-style] span {
+    overflow-wrap: break-word;
+}
+
+body[data-ui-style] .logo img {
+    width: auto;
+    height: auto;
+    max-width: 190px;
+    max-height: 56px;
+    object-fit: contain;
+}
+
+body[data-ui-style] .ui-style-control {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-left: auto;
+    margin-right: 1.5rem;
+    color: var(--text-muted);
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+body[data-ui-style] .ui-style-control select {
+    padding: 0.38rem 0.8rem;
+    border: 1px solid var(--accent);
+    border-radius: 999px;
+    background: var(--white);
+    color: var(--text-main);
+    font: inherit;
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0;
+    text-transform: none;
+    cursor: pointer;
+}
+
+body[data-ui-style] .expandable-content p,
+body[data-ui-style] .service-block p,
+body[data-ui-style] .service-list li,
+body[data-ui-style] .director-text p,
+body[data-ui-style] .mv-block p {
+    text-align: left;
+}
+
+body[data-ui-style] .expandable-container::after {
+    background: linear-gradient(transparent, var(--card-bg, var(--white)));
+}
+
+body[data-ui-style] .about-grid > *,
+body[data-ui-style] .services-container > *,
+body[data-ui-style] .values-grid > *,
+body[data-ui-style] .gallery-grid > * {
+    min-width: 0;
+}
+
+body[data-ui-style] .gallery-item {
+    height: auto;
+    aspect-ratio: 4 / 3;
+}
+
+body[data-ui-style] .gallery-grid {
+    grid-auto-flow: dense;
+}
+
+@media (max-width: 768px) {
+    body[data-ui-style] .ui-style-control {
+        margin-right: 1rem;
+    }
+
+    body[data-ui-style] .ui-style-control span {
+        display: none;
+    }
+
+    body[data-ui-style] header {
+        padding: 0.85rem 5%;
+    }
+
+    body[data-ui-style] section {
+        padding: 4.5rem 6% 3rem;
+    }
+
+    body[data-ui-style] .hero-content h1 {
+        font-size: clamp(2.4rem, 12vw, 3.6rem);
+    }
+}

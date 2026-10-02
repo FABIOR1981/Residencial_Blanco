@@ -67,10 +67,25 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    // Cada formato tiene su hoja en css/formatos/; se carga solo la del formato activo.
+    function cargarCssFormato(estilo) {
+        document.querySelectorAll('link[data-formato-css]').forEach(enlace => enlace.remove());
+        if (estilo === 0) return;
+        const archivo = (cfgUI.OPCIONES.find(opcion => Number(opcion.ID) === estilo) || {}).ARCHIVO;
+        ['_comun.css', archivo].filter(Boolean).forEach(nombre => {
+            const enlace = document.createElement('link');
+            enlace.rel = 'stylesheet';
+            enlace.href = `css/formatos/${nombre}`;
+            enlace.dataset.formatoCss = '';
+            document.head.appendChild(enlace);
+        });
+    }
+
     function aplicarFormatoInterfaz(estilo) {
         const estilosDisponibles = Array.isArray(cfgUI.OPCIONES) ? cfgUI.OPCIONES : [];
         const estiloValido = estilosDisponibles.some(opcion => Number(opcion.ID) === Number(estilo)) ? Number(estilo) : 0;
         document.body.dataset.uiStyle = estiloValido;
+        cargarCssFormato(estiloValido);
 
         const selector = document.getElementById('ui-style-selector');
         if (!selector) return;

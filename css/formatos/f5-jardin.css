@@ -1,0 +1,145 @@
+/* 5. JARDÍN VIVO: formas suaves, pasteles, mosaico orgánico */
+body[data-ui-style="5"] {
+    --primary: #765985;
+    --primary-dark: #4c385b;
+    --accent: #ed927d;
+    --bg-light: #fff3eb;
+    --text-main: #3e3445;
+    --text-muted: #766b79;
+    --white: #fffdfb;
+    --card-radius: 24px;
+    --shadow: 0 14px 34px rgba(76, 56, 91, 0.1);
+    --border-card: 1px solid rgba(118, 89, 133, 0.12);
+}
+
+body[data-ui-style="5"] header {
+    top: 14px;
+    left: 5%;
+    width: 90%;
+    padding: 0.7rem 1.6rem;
+    border-radius: 999px;
+    box-shadow: 0 10px 30px rgba(76, 56, 91, 0.14);
+}
+
+body[data-ui-style="5"] section {
+    padding: 6rem 8% 4.5rem;
+}
+
+body[data-ui-style="5"] .hero {
+    min-height: 640px;
+    padding-top: 7rem;
+    border-radius: 0 0 56px 56px;
+    color: var(--primary-dark);
+    background: linear-gradient(180deg, rgba(255, 243, 235, 0.6), rgba(255, 243, 235, 0.88)), var(--hero-image) center/cover no-repeat;
+}
+
+body[data-ui-style="5"] .hero-content h1 {
+    color: var(--primary-dark);
+    letter-spacing: 0;
+}
+
+body[data-ui-style="5"] .hero-content h2 {
+    color: var(--primary);
+}
+
+body[data-ui-style="5"] .btn {
+    background: var(--accent);
+    color: var(--primary-dark);
+}
+
+body[data-ui-style="5"] #mision-vision {
+    background: var(--white);
+}
+
+body[data-ui-style="5"] #valores {
+    background: #f1e8f6;
+}
+
+body[data-ui-style="5"] .value-item:nth-child(odd) {
+    background: var(--white);
+}
+
+body[data-ui-style="5"] .value-item:nth-child(even) {
+    background: #fbd9cf;
+}
+
+body[data-ui-style="5"] .services-container {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.5rem;
+    padding: 0;
+}
+
+body[data-ui-style="5"] .service-block {
+    --card-bg: #eadcf3;
+    padding: 2.25rem 2rem;
+    background: var(--card-bg);
+    border: none;
+}
+
+body[data-ui-style="5"] .service-block:nth-child(4n + 2),
+body[data-ui-style="5"] .service-block:nth-child(4n + 3) {
+    --card-bg: #fbd9cf;
+}
+
+body[data-ui-style="5"] .gallery-grid {
+    display: block;
+    column-count: 3;
+    column-gap: 1rem;
+}
+
+body[data-ui-style="5"] .gallery-item {
+    display: block;
+    margin-bottom: 1rem;
+    break-inside: avoid;
+    aspect-ratio: auto;
+    height: 260px;
+    border: none;
+    border-radius: 28px;
+}
+
+body[data-ui-style="5"] .gallery-item[data-pos="1"],
+body[data-ui-style="5"] .gallery-item[data-pos="5"] {
+    height: 320px;
+}
+
+body[data-ui-style="5"] .gallery-item[data-pos="2"],
+body[data-ui-style="5"] .gallery-item[data-pos="6"] {
+    height: 220px;
+}
+
+body[data-ui-style="5"] .social-icons a {
+    background: var(--primary);
+}
+
+@media (max-width: 980px) {
+    body[data-ui-style="5"] .services-container {
+        grid-template-columns: 1fr;
+    }
+
+    body[data-ui-style="5"] .gallery-grid {
+        column-count: 2;
+    }
+}
+
+@media (max-width: 768px) {
+    body[data-ui-style="5"] header {
+        top: 8px;
+        left: 3%;
+        width: 94%;
+        padding: 0.6rem 1.1rem;
+        border-radius: 28px;
+    }
+
+    body[data-ui-style="5"] .hero {
+        border-radius: 0 0 32px 32px;
+    }
+
+    body[data-ui-style="5"] .gallery-grid {
+        column-count: 1;
+    }
+
+    body[data-ui-style="5"] .gallery-item,
+    body[data-ui-style="5"] .gallery-item[data-pos] {
+        height: 230px;
+    }
+}
