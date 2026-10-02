@@ -103,7 +103,7 @@ const CONFIG = {
   CLOUDINARY: {
     CLOUD_NAME: 'p0qlmlor',        // Cloud name de la cuenta
     UPLOAD_PRESET: 'subir_gestor',    // Preset unsigned de subida de Cloudinary
-    CARPETA_BASE: 'enBlanco/Residencial',        // Carpeta raíz para las imágenes subidas
+    CARPETA_BASE: 'en_Blanco/Residencial',        // Carpeta raíz para las imágenes subidas
     CARPETA_DEFAULT: 'galeria',     // Subcarpeta seleccionada por defecto
     TAG_GALERIA: 'galeria_general',  // Etiqueta que llevan las fotos de la galería
     TAG_INSTALACIONES: 'instalaciones' // Etiqueta que llevan las fotos de instalaciones en Cloudinary
