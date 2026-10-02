@@ -108,7 +108,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // En el formato 7 los enlaces internos (#contacto, etc.) cambian de pestaña.
     document.addEventListener('click', e => {
-        if (document.body.dataset.uiStyle !== '7') return;
+        if (document.body.dataset.uiStyle !== '7' || !window.matchMedia('(max-width: 768px)').matches) return;
         const enlace = e.target.closest('a[href^="#"]');
         if (!enlace) return;
         const indice = GRUPOS_APP.findIndex(grupo => grupo.secciones.includes(enlace.getAttribute('href').slice(1)));

@@ -38,7 +38,7 @@ const CONFIG = {
       { ID: 4, NOMBRE: 'Revista Bento', ARCHIVO: 'f4-revista.css' },
       { ID: 5, NOMBRE: 'Jardín Vivo', ARCHIVO: 'f5-jardin.css' },
       { ID: 6, NOMBRE: 'Brutalista Pop', ARCHIVO: 'f6-brutalista.css' },
-      { ID: 7, NOMBRE: 'App por Pestañas', ARCHIVO: 'f7-app.css' }
+      { ID: 7, NOMBRE: 'Original móvil (pestañas)', ARCHIVO: 'f7-app.css' }
     ]
   },
 
