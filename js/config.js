@@ -9,8 +9,8 @@ const CONFIG = {
     NOMBRE_COMPLETO: 'Nombre Completo de la Institución',
     TITULO: 'Título del Sitio | Eslogan o Actividad',
     DESCRIPCION: 'Descripción general de la institución o servicio, enfocada en la calidad, el profesionalismo y el bienestar.',
-    LOGO: 'img/logo_transparente.webp',
-    IMAGEN_DIRECTOR: 'img/director.webp',
+    LOGO: 'logo_transparente.webp',
+    IMAGEN_DIRECTOR: 'director.webp',
     IMAGEN_HERO: 'https://res.cloudinary.com/p0qlmlor/image/upload/q_auto,f_auto,w_1200/v1/enBlanco/Residencial/instalaciones/fachada.webp',
     ANO: '2026'
   },
@@ -106,7 +106,8 @@ const CONFIG = {
     CARPETA_BASE: 'en_Blanco/Residencial',        // Carpeta raíz para las imágenes subidas
     CARPETA_DEFAULT: 'galeria',     // Subcarpeta seleccionada por defecto
     TAG_GALERIA: 'enBlanco_residencial_galeria',  // Etiqueta que llevan las fotos de la galería
-    TAG_INSTALACIONES: 'enBlanco_residencial_instalaciones' // Etiqueta que llevan las fotos de instalaciones en Cloudinary
+    TAG_INSTALACIONES: 'enBlanco_residencial_instalaciones' ,
+    TAG_PERSONAL: 'enBlanco_residencial_personal'// Etiqueta que llevan las fotos de instalaciones en Cloudinary
   },
 
   // --- Contacto y redes ---

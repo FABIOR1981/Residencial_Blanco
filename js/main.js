@@ -35,7 +35,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
         document.querySelectorAll('[data-config-brand-attr]').forEach(elemento => {
             const [atributo, clave] = elemento.dataset.configBrandAttr.split(':');
-            if (cfgMarca[clave] !== undefined) elemento.setAttribute(atributo, resolverTexto(cfgMarca[clave]));
+            if (cfgMarca[clave] !== undefined && !['LOGO', 'IMAGEN_DIRECTOR'].includes(clave)) {
+                elemento.setAttribute(atributo, resolverTexto(cfgMarca[clave]));
+            }
         });
 
         Object.entries(cfgTema).forEach(([clave, valor]) => {
@@ -138,6 +140,38 @@ document.addEventListener('DOMContentLoaded', () => {
     // Configuración general de Cloudinary
     const cfgCloudinary = (typeof CONFIG !== 'undefined' && CONFIG.CLOUDINARY) ? CONFIG.CLOUDINARY : {};
     const cloudName = cfgCloudinary.CLOUD_NAME;
+
+    function cargarRecursosPersonales() {
+        const tagPersonal = cfgCloudinary.TAG_PERSONAL;
+        if (!cloudName || !tagPersonal) return;
+
+        fetch(`https://res.cloudinary.com/${cloudName}/image/list/${tagPersonal}.json`)
+            .then(response => {
+                if (!response.ok) throw new Error('No se pudo obtener la lista de recursos personales de Cloudinary.');
+                return response.json();
+            })
+            .then(data => {
+                const recursos = data.resources || [];
+                const crearUrl = recurso => `https://res.cloudinary.com/${cloudName}/image/upload/q_auto,f_auto,w_1200/v${recurso.version}/${recurso.public_id}.${recurso.format}`;
+                const encontrar = (referencia, alternativa) => {
+                    const nombre = String(referencia || '').split('/').pop().replace(/\.[^.]+$/, '').toLowerCase();
+                    return recursos.find(recurso => recurso.public_id.split('/').pop().toLowerCase().includes(nombre))
+                        || recursos.find(recurso => alternativa.test(recurso.public_id));
+                };
+                const logo = encontrar(cfgMarca.LOGO, /logo/i);
+                const director = encontrar(cfgMarca.IMAGEN_DIRECTOR, /director/i);
+
+                if (logo) document.querySelectorAll('[data-config-brand-attr="src:LOGO"]').forEach(elemento => {
+                    elemento.src = crearUrl(logo);
+                });
+                if (director) document.querySelectorAll('[data-config-brand-attr="src:IMAGEN_DIRECTOR"]').forEach(elemento => {
+                    elemento.src = crearUrl(director);
+                });
+            })
+            .catch(error => console.error('Error cargando los recursos personales desde Cloudinary:', error));
+    }
+
+    cargarRecursosPersonales();
 
     function escaparHtml(texto) {
         return String(texto).replace(/[&<>'"]/g, caracter => ({
