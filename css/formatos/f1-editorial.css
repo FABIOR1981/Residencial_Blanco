@@ -150,13 +150,6 @@ body[data-ui-style="1"] .social-icons {
         font-size: 1.05rem;
     }
 
-    body[data-ui-style="1"] .ui-style-control {
-        order: 3;
-        flex-direction: column;
-        align-items: flex-start;
-        margin: auto 0 0;
-    }
-
     body[data-ui-style="1"] .hero {
         height: 100vh;
     }

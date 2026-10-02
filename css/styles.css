@@ -625,6 +625,55 @@ section {
     transform: scale(1.1);
 }
 
+/* Selector de formato flotante (opuesto a WhatsApp) */
+.ui-style-control {
+    position: fixed;
+    bottom: 30px;
+    left: 30px;
+    z-index: 1500;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 0.9rem;
+    background: #FFFFFF;
+    color: #263B4D;
+    border-radius: 999px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+.ui-style-control[hidden] {
+    display: none;
+}
+
+.ui-style-control select {
+    padding: 0.3rem 0.6rem;
+    border: 1px solid var(--accent);
+    border-radius: 999px;
+    background: #FFFFFF;
+    color: #263B4D;
+    font: inherit;
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0;
+    text-transform: none;
+    cursor: pointer;
+}
+
+@media (max-width: 768px) {
+    .ui-style-control {
+        bottom: 20px;
+        left: 20px;
+    }
+
+    .ui-style-control span {
+        display: none;
+    }
+}
+
 /* Footer */
 footer {
     background: var(--primary-dark);
