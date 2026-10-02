@@ -36,7 +36,9 @@ const CONFIG = {
       { ID: 2, NOMBRE: 'Ficha Minimal', ARCHIVO: 'f2-minimal.css' },
       { ID: 3, NOMBRE: 'Cinemático', ARCHIVO: 'f3-cinematico.css' },
       { ID: 4, NOMBRE: 'Revista Bento', ARCHIVO: 'f4-revista.css' },
-      { ID: 5, NOMBRE: 'Jardín Vivo', ARCHIVO: 'f5-jardin.css' }
+      { ID: 5, NOMBRE: 'Jardín Vivo', ARCHIVO: 'f5-jardin.css' },
+      { ID: 6, NOMBRE: 'Brutalista Pop', ARCHIVO: 'f6-brutalista.css' },
+      { ID: 7, NOMBRE: 'App por Pestañas', ARCHIVO: 'f7-app.css' }
     ]
   },
 

@@ -67,6 +67,57 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    // Formato 7: una sola pantalla visible a la vez, con barra de pestañas inferior.
+    const GRUPOS_APP = [
+        { nav: 0, icono: 'fa-house', secciones: ['inicio'] },
+        { nav: 1, icono: 'fa-users', secciones: ['mision-vision', 'valores'] },
+        { nav: 3, icono: 'fa-hand-holding-heart', secciones: ['servicios'] },
+        { nav: 5, icono: 'fa-images', secciones: ['instalaciones', 'galeria'] },
+        { nav: 6, icono: 'fa-phone', secciones: ['contacto'] }
+    ];
+
+    function mostrarPestana(indice) {
+        const grupo = GRUPOS_APP[indice];
+        document.querySelectorAll('body > section').forEach(seccion => {
+            seccion.classList.toggle('tab-visible', grupo.secciones.includes(seccion.id));
+        });
+        document.querySelectorAll('#app-tabs button').forEach((boton, i) => {
+            boton.classList.toggle('active', i === indice);
+        });
+        window.scrollTo(0, 0);
+    }
+
+    function configurarModoApp(activo) {
+        document.getElementById('app-tabs')?.remove();
+        document.querySelectorAll('body > section.tab-visible').forEach(seccion => seccion.classList.remove('tab-visible'));
+        if (!activo) return;
+
+        const barra = document.createElement('nav');
+        barra.id = 'app-tabs';
+        barra.setAttribute('aria-label', 'Secciones');
+        barra.innerHTML = GRUPOS_APP.map((grupo, i) =>
+            `<button type="button" data-tab="${i}"><i class="fas ${grupo.icono}"></i><span>${escaparHtml(cfgTextos.NAVEGACION?.[grupo.nav] ?? '')}</span></button>`
+        ).join('');
+        barra.addEventListener('click', e => {
+            const boton = e.target.closest('button');
+            if (boton) mostrarPestana(Number(boton.dataset.tab));
+        });
+        document.body.appendChild(barra);
+        mostrarPestana(0);
+    }
+
+    // En el formato 7 los enlaces internos (#contacto, etc.) cambian de pestaña.
+    document.addEventListener('click', e => {
+        if (document.body.dataset.uiStyle !== '7') return;
+        const enlace = e.target.closest('a[href^="#"]');
+        if (!enlace) return;
+        const indice = GRUPOS_APP.findIndex(grupo => grupo.secciones.includes(enlace.getAttribute('href').slice(1)));
+        if (indice >= 0) {
+            e.preventDefault();
+            mostrarPestana(indice);
+        }
+    });
+
     // Cada formato tiene su hoja en css/formatos/; se carga solo la del formato activo.
     function cargarCssFormato(estilo) {
         document.querySelectorAll('link[data-formato-css]').forEach(enlace => enlace.remove());
@@ -86,6 +137,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const estiloValido = estilosDisponibles.some(opcion => Number(opcion.ID) === Number(estilo)) ? Number(estilo) : 0;
         document.body.dataset.uiStyle = estiloValido;
         cargarCssFormato(estiloValido);
+        configurarModoApp(estiloValido === 7);
 
         const selector = document.getElementById('ui-style-selector');
         if (!selector) return;
