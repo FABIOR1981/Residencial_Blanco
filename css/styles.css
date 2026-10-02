@@ -1500,6 +1500,220 @@ body[data-ui-style="4"] .gallery-item:nth-child(1) {
     }
 }
 
+/* ============================================================
+   Identidad final de estilos alternativos
+   ============================================================ */
+
+/* 1. Editorial Lateral: vino, rosa empolvado y papel. */
+body[data-ui-style="1"] {
+    --primary: #713f57;
+    --primary-dark: #44263a;
+    --accent: #d58a91;
+    --bg-light: #fbf1ef;
+    --text-main: #382d35;
+    --text-muted: #756572;
+    --white: #fffaf8;
+    --border-card: 1px solid rgba(113, 63, 87, 0.16);
+    --shadow: 0 18px 45px rgba(113, 63, 87, 0.1);
+}
+
+body[data-ui-style="1"] header {
+    background: #f2e3e5;
+    border-right-color: rgba(113, 63, 87, 0.18);
+}
+
+body[data-ui-style="1"] .hero {
+    background: linear-gradient(125deg, rgba(68, 38, 58, 0.9), rgba(68, 38, 58, 0.16)), var(--hero-image) center/cover no-repeat;
+}
+
+body[data-ui-style="1"] .card-director {
+    border-left: 6px solid var(--accent);
+    border-top: 0;
+}
+
+body[data-ui-style="1"] #servicios .service-block:nth-child(1) {
+    background: #ead5d8;
+}
+
+body[data-ui-style="1"] #servicios .service-block:nth-child(3) {
+    background: #f5e5df;
+}
+
+/* 2. Ficha Minimal: turquesa, mandarina y blanco técnico. */
+body[data-ui-style="2"] {
+    --primary: #287c82;
+    --primary-dark: #18555b;
+    --accent: #e78b55;
+    --bg-light: #f5f8f6;
+    --text-main: #263b3e;
+    --text-muted: #647578;
+    --white: #ffffff;
+    --border-card: 1px solid #d2e3df;
+    --shadow: none;
+}
+
+body[data-ui-style="2"] .hero {
+    background: linear-gradient(90deg, #f5f8f6 0 57%, rgba(245, 248, 246, 0.12) 57%), var(--hero-image) right center/43% 100% no-repeat;
+}
+
+body[data-ui-style="2"] .hero-content .btn {
+    background: var(--accent);
+    color: #fff;
+}
+
+body[data-ui-style="2"] .card-director,
+body[data-ui-style="2"] .combined-mv {
+    border-top: 4px solid var(--primary);
+}
+
+body[data-ui-style="2"] #servicios .service-block {
+    border-left: 4px solid var(--accent);
+}
+
+body[data-ui-style="2"] #instalaciones,
+body[data-ui-style="2"] #galeria {
+    background: #e8f2ef;
+}
+
+/* 3. Cinemático: azul noche, oro suave y luz controlada. */
+body[data-ui-style="3"] {
+    --primary: #9bd9cf;
+    --primary-dark: #d2f1e9;
+    --accent: #e5b96d;
+    --bg-light: #101522;
+    --text-main: #f4f0e8;
+    --text-muted: #abb6c2;
+    --white: #192235;
+    --border-card: 1px solid rgba(229, 185, 109, 0.2);
+}
+
+body[data-ui-style="3"] .hero {
+    background: linear-gradient(105deg, rgba(10, 14, 28, 0.98), rgba(10, 14, 28, 0.2)), var(--hero-image) center/cover no-repeat;
+}
+
+body[data-ui-style="3"] .hero-content .btn {
+    background: var(--accent);
+    color: #151a29;
+}
+
+body[data-ui-style="3"] #mision-vision,
+body[data-ui-style="3"] #servicios {
+    background: #151c2d !important;
+}
+
+body[data-ui-style="3"] #valores,
+body[data-ui-style="3"] #instalaciones,
+body[data-ui-style="3"] #galeria {
+    background: #0b101c;
+}
+
+body[data-ui-style="3"] .gallery-item {
+    border-color: rgba(229, 185, 109, 0.28);
+}
+
+/* 4. Revista Bento: tinta azul, coral y crema editorial. */
+body[data-ui-style="4"] {
+    --primary: #31506b;
+    --primary-dark: #1d3043;
+    --accent: #ef755f;
+    --bg-light: #fff4e8;
+    --text-main: #293746;
+    --text-muted: #687582;
+    --white: #fffdf9;
+    --border-card: 1px solid rgba(49, 80, 107, 0.14);
+    --shadow: 0 18px 45px rgba(49, 80, 107, 0.13);
+}
+
+body[data-ui-style="4"] .hero {
+    background: linear-gradient(90deg, rgba(29, 48, 67, 0.96) 0 53%, rgba(29, 48, 67, 0.12)), var(--hero-image) center/cover no-repeat;
+}
+
+body[data-ui-style="4"] .hero-content {
+    border-left-color: var(--accent);
+}
+
+body[data-ui-style="4"] #valores .value-item:nth-child(1),
+body[data-ui-style="4"] #valores .value-item:nth-child(4) {
+    background: #dbe8ef;
+}
+
+body[data-ui-style="4"] #valores .value-item:nth-child(2),
+body[data-ui-style="4"] #valores .value-item:nth-child(5) {
+    background: #ffe1d4;
+}
+
+body[data-ui-style="4"] #valores .value-item:nth-child(3),
+body[data-ui-style="4"] #valores .value-item:nth-child(6) {
+    background: #f4e9d8;
+}
+
+/* 5. Jardín Vivo renovado: lavanda, durazno y ciruela, sin verde. */
+body[data-ui-style="5"] {
+    --primary: #765985;
+    --primary-dark: #4c385b;
+    --accent: #ed927d;
+    --bg-light: #fff3eb;
+    --text-main: #3e3445;
+    --text-muted: #766b79;
+    --white: #fffdfb;
+    --card-radius: 24px;
+    --border-card: 1px solid rgba(118, 89, 133, 0.16);
+    --shadow: 0 16px 40px rgba(118, 89, 133, 0.12);
+}
+
+body[data-ui-style="5"] header {
+    background: rgba(255, 253, 251, 0.9);
+    box-shadow: 0 4px 20px rgba(118, 89, 133, 0.1);
+}
+
+body[data-ui-style="5"] nav a,
+body[data-ui-style="5"] .ui-style-control,
+body[data-ui-style="5"] .ui-style-control select {
+    color: var(--primary-dark);
+}
+
+body[data-ui-style="5"] .hero {
+    background: linear-gradient(90deg, #fff3eb 0 50%, rgba(255, 243, 235, 0.08) 50%), var(--hero-image) right center/52% 100% no-repeat;
+}
+
+body[data-ui-style="5"] .hero-content h1,
+body[data-ui-style="5"] .hero-content h2,
+body[data-ui-style="5"] .hero-content p {
+    color: var(--text-main);
+}
+
+body[data-ui-style="5"] #valores {
+    background: #eee5f2;
+}
+
+body[data-ui-style="5"] #valores .value-item:nth-child(odd) {
+    background: #fffdfb;
+}
+
+body[data-ui-style="5"] #valores .value-item:nth-child(even) {
+    background: #f8d9d2;
+}
+
+body[data-ui-style="5"] #servicios {
+    background: #fffdfb !important;
+}
+
+body[data-ui-style="5"] #servicios .service-block:first-child {
+    background: #eadcf0;
+}
+
+body[data-ui-style="5"] #servicios .service-block:last-child {
+    background: #f8d9d2;
+}
+
+body[data-ui-style="5"] #contacto {
+    background: #4c385b;
+}
+
+body[data-ui-style="5"] footer {
+    background: #35263f;
+}
+
 /* 5. Jardín Vivo: recorrido cálido, orgánico y centrado en el bienestar. */
 body[data-ui-style="5"] {
     --primary: #557468;
