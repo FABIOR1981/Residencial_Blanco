@@ -11,7 +11,7 @@ const CONFIG = {
     DESCRIPCION: 'Descripción general de la institución o servicio, enfocada en la calidad, el profesionalismo y el bienestar.',
     LOGO: 'img/logo_transparente.webp',
     IMAGEN_DIRECTOR: 'img/director.webp',
-    IMAGEN_HERO: 'https://res.cloudinary.com/tu_cloud_name/image/upload/q_auto,f_auto,w_1200/v1/placeholder/instalaciones/fachada.webp',
+    IMAGEN_HERO: 'https://res.cloudinary.com/p0qlmlor/image/upload/q_auto,f_auto,w_1200/v1/enBlanco/Residencial/instalaciones/fachada.webp',
     ANO: '2026'
   },
 
