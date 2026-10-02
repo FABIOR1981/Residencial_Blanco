@@ -279,6 +279,23 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    // Muestra solo las primeras N imágenes (que coincidan con el filtro) y activa "Ver galería completa" si sobran
+    const limiteVisibles = Number(cfgCloudinary.LIMITE_VISIBLES) || 6;
+
+    function actualizarGrilla(grilla, filtro = 'all') {
+        if (!grilla) return;
+        grilla.dataset.filtro = filtro;
+        let coincidentes = 0;
+        grilla.querySelectorAll('.gallery-item').forEach(item => {
+            const coincide = filtro === 'all' || item.dataset.category === filtro;
+            if (coincide) coincidentes++;
+            item.style.display = coincide && coincidentes <= limiteVisibles ? '' : 'none';
+        });
+        marcarPosiciones(grilla);
+        const contenedorMas = document.querySelector(`[data-galeria-completa="${grilla.id}"]`)?.closest('.gallery-more');
+        if (contenedorMas) contenedorMas.hidden = coincidentes <= limiteVisibles;
+    }
+
     // 2. Cargar Instalaciones Dinámicas desde Cloudinary (con orden y filtros automáticos)
     const instalacionesDinamicas = document.getElementById('instalaciones-dinamicas');
     const contenedorFiltros = document.getElementById('instalaciones-filtros');
@@ -339,7 +356,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 }).join('');
                 
                 instalacionesDinamicas.innerHTML = htmlInstalaciones;
-                marcarPosiciones(instalacionesDinamicas);
+                actualizarGrilla(instalacionesDinamicas);
                 
                 inicializarFiltrosInstalaciones();
                 inicializarLightbox();
@@ -365,11 +382,7 @@ document.addEventListener('DOMContentLoaded', () => {
             btn.classList.add('active');
 
             const filtro = btn.getAttribute('data-filter');
-            document.querySelectorAll('#instalaciones-dinamicas .gallery-item').forEach(item => {
-                const visible = filtro === 'all' || item.getAttribute('data-category') === filtro;
-                item.style.display = visible ? '' : 'none';
-            });
-            marcarPosiciones(document.getElementById('instalaciones-dinamicas'));
+            actualizarGrilla(document.getElementById('instalaciones-dinamicas'), filtro);
         });
     }
 
@@ -391,6 +404,9 @@ document.addEventListener('DOMContentLoaded', () => {
                     return;
                 }
 
+                // Las más recientes primero
+                imagenes.sort((a, b) => new Date(b.created_at || 0) - new Date(a.created_at || 0));
+
                 const htmlImagenes = imagenes.map(img => {
                     const urlImagen = `https://res.cloudinary.com/${cloudName}/image/upload/q_auto,f_auto,w_1200,c_limit/v${img.version}/${img.public_id}.${img.format}`;
                     const titulo = escaparHtml(obtenerTitulo(img));
@@ -408,7 +424,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 }).join('');
                 
                 galeriaDinamica.innerHTML = htmlImagenes;
-                marcarPosiciones(galeriaDinamica);
+                actualizarGrilla(galeriaDinamica);
                 inicializarLightbox();
             })
             .catch(error => {
@@ -441,26 +457,21 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // 5. Lógica del Lightbox
+    // 5. Lógica del Lightbox (un solo listener delegado: sirve también para las fotos del modal)
     function inicializarLightbox() {
         const lightbox = document.getElementById('lightbox');
         const lightboxImg = document.getElementById('lightbox-img');
         const lightboxClose = document.getElementById('lightbox-close');
-        const allGalleryItems = document.querySelectorAll('.gallery-item');
 
-        if (!lightbox || !lightboxImg || !lightboxClose) return;
+        if (!lightbox || !lightboxImg || !lightboxClose || lightbox.dataset.listo === '1') return;
+        lightbox.dataset.listo = '1';
 
-        allGalleryItems.forEach(item => {
-            const nuevoItem = item.cloneNode(true);
-            item.parentNode.replaceChild(nuevoItem, item);
-            
-            nuevoItem.addEventListener('click', () => {
-                const imgElement = nuevoItem.querySelector('img');
-                if (imgElement) {
-                    lightboxImg.setAttribute('src', imgElement.getAttribute('src'));
-                    lightbox.style.display = 'flex';
-                }
-            });
+        document.addEventListener('click', (e) => {
+            const imgElement = e.target.closest('.gallery-item')?.querySelector('img');
+            if (imgElement) {
+                lightboxImg.setAttribute('src', imgElement.getAttribute('src'));
+                lightbox.style.display = 'flex';
+            }
         });
 
         lightboxClose.addEventListener('click', () => {
@@ -473,6 +484,50 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     }
+
+    // 5b. Modal con la galería completa
+    const modalGaleria = document.getElementById('gallery-modal');
+    const modalGrilla = document.getElementById('gallery-modal-grid');
+
+    function cerrarModalGaleria() {
+        modalGaleria.hidden = true;
+        document.body.style.overflow = '';
+    }
+
+    function abrirModalGaleria(idGrilla) {
+        const grilla = document.getElementById(idGrilla);
+        if (!grilla || !modalGaleria || !modalGrilla) return;
+
+        const filtro = grilla.dataset.filtro || 'all';
+        document.getElementById('gallery-modal-title').textContent =
+            grilla.closest('section')?.querySelector('.section-title')?.textContent || '';
+
+        modalGrilla.innerHTML = '';
+        grilla.querySelectorAll('.gallery-item').forEach(item => {
+            if (filtro !== 'all' && item.dataset.category !== filtro) return;
+            const copia = item.cloneNode(true);
+            copia.style.display = '';
+            copia.removeAttribute('data-pos');
+            modalGrilla.appendChild(copia);
+        });
+
+        modalGaleria.hidden = false;
+        modalGaleria.scrollTop = 0;
+        document.body.style.overflow = 'hidden';
+    }
+
+    document.addEventListener('click', (e) => {
+        const boton = e.target.closest('[data-galeria-completa]');
+        if (boton) {
+            abrirModalGaleria(boton.dataset.galeriaCompleta);
+        } else if (modalGaleria && e.target.closest('#gallery-modal-close')) {
+            cerrarModalGaleria();
+        }
+    });
+
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && modalGaleria && !modalGaleria.hidden) cerrarModalGaleria();
+    });
 
     // 6. Datos de contacto y redes desde config.js
     const cfgContacto = (typeof CONFIG !== 'undefined' && CONFIG.CONTACTO) ? CONFIG.CONTACTO : {};

@@ -222,6 +222,9 @@
         <div class="gallery-grid" id="instalaciones-dinamicas">
             <!-- Se carga dinámicamente desde Cloudinary -->
         </div>
+        <div class="gallery-more" hidden>
+            <button type="button" class="btn" data-galeria-completa="instalaciones-dinamicas" data-config-text="BOTON_VER_GALERIA">Ver galería completa</button>
+        </div>
     </section>
     <!-- Galería de Actividades Dinámica -->
     <section id="galeria" class="gallery-container">
@@ -233,7 +236,17 @@
 
         <div class="gallery-grid" id="galeria-dinamica">
         </div>
+        <div class="gallery-more" hidden>
+            <button type="button" class="btn" data-galeria-completa="galeria-dinamica" data-config-text="BOTON_VER_GALERIA">Ver galería completa</button>
+        </div>
     </section>
+
+    <!-- Modal de galería completa -->
+    <div class="gallery-modal" id="gallery-modal" hidden>
+        <button type="button" class="gallery-modal-close" id="gallery-modal-close" aria-label="Cerrar galería">&times;</button>
+        <h3 id="gallery-modal-title"></h3>
+        <div class="gallery-modal-grid" id="gallery-modal-grid"></div>
+    </div>
 
     <!-- Lightbox Modal -->
     <div class="lightbox" id="lightbox">

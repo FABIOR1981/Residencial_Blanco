@@ -57,6 +57,7 @@ const CONFIG = {
     DESCRIPCION_CONTACTO: '¿Querés coordinar una visita o tenés alguna consulta? Estamos para escucharte y asesorarte de forma personalizada.',
     BOTON_MAS: 'Ver más',
     BOTON_MENOS: 'Ver menos',
+    BOTON_VER_GALERIA: 'Ver galería completa',
     DIRECTOR_ALT: 'Responsable de la institución',
     VALOR_HOGAR: 'Buscamos construir un espacio donde cada persona se sienta valorada, contenida y parte de una comunidad.',
     FALLBACK_GALERIA: 'Galería',
@@ -122,6 +123,7 @@ const CONFIG = {
     CARPETA_BASE: 'en_Blanco/Residencial',        // Carpeta raíz para las imágenes subidas
     CARPETA_DEFAULT: 'galeria',     // Subcarpeta seleccionada por defecto
     TAG_GALERIA: 'enBlanco_residencial_galeria',  // Etiqueta que llevan las fotos de la galería
+    LIMITE_VISIBLES: 6,            // Fotos mostradas en la página; el resto se ve en "Ver galería completa"
     TAG_INSTALACIONES: 'enBlanco_residencial_instalaciones' // Etiqueta que llevan las fotos de instalaciones en Cloudinary
   },
 
