@@ -336,8 +336,7 @@
   <main>
     <div class="toolbar" aria-label="Acciones de archivo">
       <button class="button" id="openButton" type="button">Abrir config.js</button>
-      <button class="button button-primary" id="saveButton" type="button" disabled>Guardar config.js</button>
-      <button class="button" id="downloadButton" type="button" disabled>Descargar copia</button>
+      <button class="button button-primary" id="downloadButton" type="button" disabled>Descargar copia</button>
       <span class="toolbar-spacer"></span>
       <input id="fileInput" type="file" accept=".js,.txt,text/javascript" hidden>
     </div>
@@ -390,7 +389,6 @@
     const fileState = document.getElementById("fileState");
     const fileInput = document.getElementById("fileInput");
     const openButton = document.getElementById("openButton");
-    const saveButton = document.getElementById("saveButton");
     const downloadButton = document.getElementById("downloadButton");
     const emptyState = document.getElementById("emptyState");
     const sections = document.getElementById("sections");
@@ -749,7 +747,6 @@
       }
       emptyState.hidden = true;
       sections.hidden = false;
-      saveButton.disabled = false;
       downloadButton.disabled = false;
     }
 
@@ -785,23 +782,6 @@
       updateStatus("config.js · copia descargada");
     }
 
-    async function saveConfig() {
-      if (typeof window.showSaveFilePicker !== "function") { downloadConfig(); return; }
-      try {
-        const handle = await window.showSaveFilePicker({
-          suggestedName: "config.js",
-          types: [{ description: "Archivo JavaScript", accept: { "text/javascript": [".js"] } }]
-        });
-        const writable = await handle.createWritable();
-        await writable.write(serializeConfig());
-        await writable.close();
-        dirty = false;
-        updateStatus(`${handle.name} · guardado`);
-      } catch (error) {
-        if (error.name !== "AbortError") updateStatus(`No se pudo guardar: ${error.message}`);
-      }
-    }
-
     openButton.addEventListener("click", () => fileInput.click());
     fileInput.addEventListener("change", async () => {
       const file = fileInput.files?.[0];
@@ -817,7 +797,6 @@
       }
       fileInput.value = "";
     });
-    saveButton.addEventListener("click", saveConfig);
     downloadButton.addEventListener("click", downloadConfig);
     window.addEventListener("beforeunload", event => {
       if (dirty) { event.preventDefault(); event.returnValue = ""; }
