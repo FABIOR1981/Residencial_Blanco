@@ -1,0 +1,834 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#173c35">
+  <title>Mantenimiento de configuración</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #202a27;
+      --muted: #64716d;
+      --line: #d9e1dc;
+      --paper: #f4f7f4;
+      --surface: #fff;
+      --green: #173c35;
+      --green-soft: #e7f0eb;
+      --lime: #c9df80;
+      --coral: #bd543d;
+      --focus: #267c69;
+      font-family: "Segoe UI", Tahoma, sans-serif;
+      color: var(--ink);
+      background: var(--paper);
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      min-width: 320px;
+      min-height: 100vh;
+      margin: 0;
+      background:
+        linear-gradient(115deg, transparent 0 74%, rgb(201 223 128 / 12%) 74% 100%),
+        var(--paper);
+    }
+
+    button, input, textarea { font: inherit; }
+    button { cursor: pointer; }
+
+    .masthead {
+      color: #f7faf7;
+      background: var(--green);
+      border-bottom: 5px solid var(--lime);
+    }
+
+    .masthead-inner, main {
+      width: min(1120px, calc(100% - 40px));
+      margin: 0 auto;
+    }
+
+    .masthead-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      min-height: 116px;
+      padding: 22px 0;
+    }
+
+    .eyebrow {
+      margin: 0 0 7px;
+      color: var(--lime);
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      margin: 0;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 34px;
+      font-weight: 400;
+      line-height: 1.1;
+    }
+
+    .file-state {
+      max-width: 320px;
+      color: #d1ddd7;
+      font-size: 13px;
+      line-height: 1.5;
+      text-align: right;
+      overflow-wrap: anywhere;
+    }
+
+    main { padding: 24px 0 64px; }
+
+    .toolbar {
+      position: sticky;
+      z-index: 2;
+      top: 0;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 9px;
+      margin: 0 0 18px;
+      padding: 12px;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      background: rgb(255 255 255 / 96%);
+      box-shadow: 0 5px 18px rgb(32 42 39 / 6%);
+      backdrop-filter: blur(10px);
+    }
+
+    .toolbar-spacer { flex: 1; }
+
+    .button {
+      min-height: 40px;
+      padding: 0 15px;
+      border: 1px solid var(--line);
+      border-radius: 4px;
+      color: var(--ink);
+      background: var(--surface);
+      font-size: 13px;
+      font-weight: 650;
+      transition: background-color .16s ease, border-color .16s ease, transform .16s ease;
+    }
+
+    .button:hover { border-color: #8ba79b; background: #f4f8f5; }
+    .button:active { transform: translateY(1px); }
+    .button:focus-visible, input:focus-visible, textarea:focus-visible, summary:focus-visible {
+      outline: 3px solid rgb(38 124 105 / 28%);
+      outline-offset: 2px;
+    }
+
+    .button-primary {
+      border-color: var(--green);
+      color: #fff;
+      background: var(--green);
+    }
+
+    .button-primary:hover { border-color: #28594f; color: #fff; background: #28594f; }
+    .button:disabled { cursor: not-allowed; opacity: .45; }
+
+    .empty-state {
+      display: grid;
+      min-height: 260px;
+      place-items: center;
+      padding: 32px;
+      border: 1px dashed #aabbb1;
+      border-radius: 6px;
+      color: var(--muted);
+      background: rgb(255 255 255 / 60%);
+      text-align: center;
+    }
+
+    .empty-state strong {
+      display: block;
+      margin-bottom: 7px;
+      color: var(--green);
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 23px;
+      font-weight: 400;
+    }
+
+    .sections { display: grid; gap: 10px; }
+
+    details.section {
+      border: 1px solid var(--line);
+      border-radius: 5px;
+      background: var(--surface);
+      animation: arrive .3s ease both;
+    }
+
+    details.section:nth-child(2) { animation-delay: 25ms; }
+    details.section:nth-child(3) { animation-delay: 50ms; }
+    details.section:nth-child(4) { animation-delay: 75ms; }
+    details.section:nth-child(5) { animation-delay: 100ms; }
+    details.section:nth-child(6) { animation-delay: 125ms; }
+
+    details.section > summary {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      min-height: 58px;
+      padding: 13px 18px;
+      color: var(--green);
+      font-size: 16px;
+      font-weight: 700;
+      cursor: pointer;
+      list-style: none;
+    }
+
+    details.section > summary::-webkit-details-marker, .nested > summary::-webkit-details-marker { display: none; }
+    details.section > summary::before, .nested > summary::before {
+      width: 8px;
+      height: 8px;
+      border-right: 2px solid currentColor;
+      border-bottom: 2px solid currentColor;
+      content: "";
+      transform: rotate(-45deg);
+      transition: transform .15s ease;
+    }
+
+    details[open] > summary::before { transform: rotate(45deg); }
+
+    .section-count {
+      margin-left: auto;
+      color: var(--muted);
+      font-size: 11px;
+      font-weight: 500;
+    }
+
+    .section-body { padding: 0 18px 20px; }
+    .fields { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px 20px; }
+
+    .field { min-width: 0; }
+    .field-wide { grid-column: 1 / -1; }
+
+    .field-label, .nested-label {
+      display: block;
+      margin: 0 0 6px;
+      color: #394943;
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .field-key {
+      margin-left: 5px;
+      color: #84918b;
+      font-size: 10px;
+      font-weight: 500;
+    }
+
+    .field input[type="text"], .field input[type="url"], .field input[type="number"], .field textarea {
+      display: block;
+      width: 100%;
+      min-height: 41px;
+      padding: 9px 11px;
+      border: 1px solid #cbd6cf;
+      border-radius: 4px;
+      color: var(--ink);
+      background: #fff;
+      line-height: 1.5;
+    }
+
+    .field textarea { min-height: 92px; resize: vertical; }
+    .field textarea.code-value { min-height: 150px; font-family: Consolas, "Courier New", monospace; font-size: 12px; }
+    .field input[type="color"] { width: 46px; height: 41px; padding: 4px; border: 1px solid #cbd6cf; border-radius: 4px; background: #fff; }
+    .color-controls { display: flex; gap: 8px; }
+    .color-controls input[type="text"] { flex: 1; min-width: 0; }
+
+    .boolean-control { display: inline-flex; align-items: center; gap: 9px; min-height: 41px; color: var(--ink); font-size: 13px; }
+    .boolean-control input { width: 18px; height: 18px; accent-color: var(--green); }
+
+    .nested-list { display: grid; gap: 10px; }
+
+    details.nested {
+      min-width: 0;
+      border: 1px solid #e1e8e3;
+      border-radius: 4px;
+      background: #fbfcfb;
+    }
+
+    .nested > summary {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      min-height: 42px;
+      padding: 9px 12px;
+      color: #30483f;
+      font-size: 13px;
+      font-weight: 650;
+      cursor: pointer;
+      list-style: none;
+    }
+
+    .nested > summary::before { width: 6px; height: 6px; }
+    .nested-content { padding: 0 12px 14px; }
+    .array-tools { display: flex; justify-content: flex-end; margin-top: 10px; }
+    .button-small { min-height: 32px; padding: 0 11px; font-size: 12px; }
+
+    .remove-button {
+      flex: 0 0 auto;
+      width: 30px;
+      height: 30px;
+      border: 1px solid #e7c7bf;
+      border-radius: 4px;
+      color: var(--coral);
+      background: #fff;
+      font-size: 17px;
+      line-height: 1;
+    }
+
+    .remove-button:hover { background: #fff2ef; }
+
+    .array-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 9px;
+      padding: 10px;
+      border: 1px solid #e1e8e3;
+      border-radius: 4px;
+      background: #fbfcfb;
+    }
+
+    .array-item-content { flex: 1; min-width: 0; }
+    .array-item-content > .field { margin: 0; }
+    .muted-note { margin: 8px 0 0; color: var(--muted); font-size: 11px; line-height: 1.5; }
+
+    @keyframes arrive {
+      from { opacity: 0; transform: translateY(5px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (max-width: 680px) {
+      .masthead-inner, main { width: min(100% - 28px, 1120px); }
+      .masthead-inner { align-items: flex-start; flex-direction: column; gap: 10px; padding: 22px 0 18px; }
+      .file-state { max-width: 100%; text-align: left; }
+      h1 { font-size: 28px; }
+      .toolbar { top: 0; gap: 7px; padding: 9px; }
+      .button { min-height: 38px; padding: 0 11px; font-size: 12px; }
+      .toolbar-spacer { display: none; }
+      .fields { grid-template-columns: minmax(0, 1fr); }
+      .field-wide { grid-column: auto; }
+      details.section > summary { padding-inline: 13px; }
+      .section-body { padding-inline: 13px; }
+      .array-item { gap: 6px; padding: 8px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; transition-duration: .01ms !important; }
+    }
+  </style>
+</head>
+<body>
+  <header class="masthead">
+    <div class="masthead-inner">
+      <div>
+        <p class="eyebrow">Residencial Blanco / herramienta local</p>
+        <h1>Mantenimiento de configuración</h1>
+      </div>
+      <div class="file-state" id="fileState" role="status" aria-live="polite">Abre `js/config.js` para comenzar.</div>
+    </div>
+  </header>
+
+  <main>
+    <div class="toolbar" aria-label="Acciones de archivo">
+      <button class="button" id="openButton" type="button">Abrir config.js</button>
+      <button class="button button-primary" id="saveButton" type="button" disabled>Guardar config.js</button>
+      <button class="button" id="downloadButton" type="button" disabled>Descargar copia</button>
+      <span class="toolbar-spacer"></span>
+      <input id="fileInput" type="file" accept=".js,.txt,text/javascript" hidden>
+    </div>
+
+    <div id="emptyState" class="empty-state">
+      <div><strong>Configuración sin cargar</strong>Abre el archivo de configuración para editarlo.</div>
+    </div>
+    <div id="sections" class="sections" hidden></div>
+  </main>
+
+  <script>
+    "use strict";
+
+    const SECTION_NAMES = {
+      MARCA: "Identidad y recursos",
+      TEMA: "Apariencia",
+      UI: "Formato de interfaz",
+      TEXTOS: "Textos del sitio",
+      CLOUDINARY: "Galería y Cloudinary",
+      CONTACTO: "Contacto y redes"
+    };
+
+    const FIELD_NAMES = {
+      NOMBRE: "Nombre de la marca", NOMBRE_COMPLETO: "Nombre completo", TITULO: "Título del sitio",
+      DESCRIPCION: "Descripción", LOGO: "Logo (URL)", IMAGEN_DIRECTOR: "Imagen del director (URL)",
+      IMAGEN_HERO: "Imagen principal (URL)", ANO: "Año", PRIMARIO: "Color primario",
+      PRIMARIO_OSCURO: "Color primario oscuro", ACENTO: "Color de acento", FONDO: "Fondo",
+      TEXTO: "Texto", FUENTE_TITULOS: "Fuente de títulos", FUENTE_TEXTO: "Fuente de texto",
+      ESTILO: "Formato activo", MOSTRAR_SELECTOR: "Mostrar selector de formatos", OPCIONES: "Formatos disponibles",
+      LEMA: "Lema", HERO_DESCRIPCION: "Descripción principal", CTA_CONTACTO: "Botón de contacto",
+      TITULO_NOSOTROS: "Título: nosotros", TITULO_VALORES: "Título: valores", TITULO_SERVICIOS: "Título: servicios",
+      TITULO_INSTALACIONES: "Título: instalaciones", TITULO_GALERIA: "Título: galería", MENSAJE_GALERIA: "Mensaje de galería",
+      TITULO_CONTACTO: "Título: contacto", DESCRIPCION_CONTACTO: "Descripción de contacto", BOTON_MAS: "Botón: ver más",
+      BOTON_MENOS: "Botón: ver menos", BOTON_VER_GALERIA: "Botón: galería completa", DIRECTOR_ALT: "Texto alternativo del director",
+      VALOR_HOGAR: "Valor: hogar", NAVEGACION: "Navegación", FILTROS_INSTALACIONES: "Filtros de instalaciones",
+      TITULO_DIRECTOR: "Título del director", NOMBRE_DIRECTOR: "Nombre del director", CARGO_DIRECTOR: "Cargo del director",
+      COMPROMISO_DIRECTOR: "Compromiso del director", POR_QUE: "¿Por qué elegirnos?", BIENVENIDA: "Bienvenida",
+      TITULO_MISION: "Título: misión", TITULO_VISION: "Título: visión", TEXTO_DIRECTOR: "Texto del director",
+      MISION: "Misión", VISION: "Visión", INTRO_INSTALACIONES: "Introducción: instalaciones",
+      INTRO_ALIMENTACION: "Introducción: alimentación", INTRO_TALLERES: "Introducción: talleres",
+      INTRO_ENFERMERIA: "Introducción: equipo", VALORES: "Valores", SERVICIOS: "Servicios",
+      INSTALACIONES: "Instalaciones", ALIMENTACION: "Alimentación", TALLERES: "Talleres",
+      ENFERMERIA: "Equipo y gestión", DETALLE: "Detalle (HTML)", INTRO: "Introducción", ARCHIVO: "Archivo CSS",
+      ID: "Identificador", CLOUD_NAME: "Cloud name", UPLOAD_PRESET: "Preset de subida", CARPETA_BASE: "Carpeta base",
+      CARPETA_DEFAULT: "Carpeta predeterminada", TAG_GALERIA: "Etiqueta de galería", LIMITE_VISIBLES: "Imágenes visibles",
+      TAG_INSTALACIONES: "Etiqueta de instalaciones", DIRECCION: "Dirección", WHATSAPP_NUMERO: "Número de WhatsApp",
+      INSTAGRAM_URL: "Instagram (URL)", FACEBOOK_URL: "Facebook (URL)"
+    };
+
+    const fileState = document.getElementById("fileState");
+    const fileInput = document.getElementById("fileInput");
+    const openButton = document.getElementById("openButton");
+    const saveButton = document.getElementById("saveButton");
+    const downloadButton = document.getElementById("downloadButton");
+    const emptyState = document.getElementById("emptyState");
+    const sections = document.getElementById("sections");
+    let config = null;
+    let dirty = false;
+    let sourceName = "config.js";
+
+    function tokenize(source) {
+      const tokens = [];
+      let position = 0;
+      while (position < source.length) {
+        const character = source[position];
+        if (/\s/.test(character)) { position += 1; continue; }
+        if (source.startsWith("//", position)) {
+          position = source.indexOf("\n", position);
+          if (position === -1) break;
+          continue;
+        }
+        if (source.startsWith("/*", position)) {
+          const end = source.indexOf("*/", position + 2);
+          if (end === -1) throw new Error("Hay un comentario sin cerrar.");
+          position = end + 2;
+          continue;
+        }
+        if (character === "'" || character === '"') {
+          const quote = character;
+          let value = "";
+          position += 1;
+          let closed = false;
+          while (position < source.length) {
+            const next = source[position++];
+            if (next === quote) { closed = true; break; }
+            if (next !== "\\") { value += next; continue; }
+            if (position >= source.length) throw new Error("Hay una cadena incompleta.");
+            const escaped = source[position++];
+            const escapes = { n: "\n", r: "\r", t: "\t", b: "\b", f: "\f", v: "\v", "0": "\0" };
+            if (Object.hasOwn(escapes, escaped)) value += escapes[escaped];
+            else if (escaped === "\n") continue;
+            else if (escaped === "\r") { if (source[position] === "\n") position += 1; }
+            else if (escaped === "x" || escaped === "u") {
+              const digits = escaped === "x" ? 2 : 4;
+              const code = source.slice(position, position + digits);
+              if (!new RegExp(`^[0-9a-fA-F]{${digits}}$`).test(code)) throw new Error("Hay una secuencia de escape inválida.");
+              value += String.fromCharCode(parseInt(code, 16));
+              position += digits;
+            } else value += escaped;
+          }
+          if (!closed) throw new Error("Hay una cadena sin cerrar.");
+          tokens.push({ type: "string", value });
+          continue;
+        }
+        const numberMatch = source.slice(position).match(/^-?(?:0|[1-9]\d*)(?:\.\d+)?(?:[eE][+-]?\d+)?/);
+        if (numberMatch) {
+          tokens.push({ type: "number", value: Number(numberMatch[0]) });
+          position += numberMatch[0].length;
+          continue;
+        }
+        const identifierMatch = source.slice(position).match(/^[A-Za-z_$][\w$]*/);
+        if (identifierMatch) {
+          tokens.push({ type: "identifier", value: identifierMatch[0] });
+          position += identifierMatch[0].length;
+          continue;
+        }
+        if ("{}[]:,;=".includes(character)) {
+          tokens.push({ type: "punctuation", value: character });
+          position += 1;
+          continue;
+        }
+        throw new Error(`No se reconoce el carácter “${character}” cerca de la posición ${position + 1}.`);
+      }
+      return tokens;
+    }
+
+    function parseConfig(source) {
+      const tokens = tokenize(source);
+      let cursor = -1;
+      for (let index = 0; index < tokens.length - 1; index += 1) {
+        if (tokens[index].type === "identifier" && tokens[index].value === "CONFIG" && tokens[index + 1].value === "=") {
+          cursor = index + 2;
+          break;
+        }
+      }
+      if (cursor === -1) throw new Error("No se encontró una asignación `CONFIG = { ... }`.");
+
+      function peek(value) { return tokens[cursor]?.value === value; }
+      function take(value) {
+        const token = tokens[cursor];
+        if (!token || (value && token.value !== value)) throw new Error(`Se esperaba “${value || "un valor"}” en la configuración.`);
+        cursor += 1;
+        return token;
+      }
+
+      function parseValue() {
+        const token = tokens[cursor];
+        if (!token) throw new Error("La configuración está incompleta.");
+        if (token.value === "{") {
+          take("{");
+          const object = {};
+          while (!peek("}")) {
+            const key = take().value;
+            if (typeof key !== "string" && typeof key !== "number") throw new Error("Hay una clave de objeto inválida.");
+            take(":");
+            object[key] = parseValue();
+            if (peek(",")) take(",");
+            else if (!peek("}")) throw new Error("Falta una coma entre campos.");
+          }
+          take("}");
+          return object;
+        }
+        if (token.value === "[") {
+          take("[");
+          const array = [];
+          while (!peek("]")) {
+            array.push(parseValue());
+            if (peek(",")) take(",");
+            else if (!peek("]")) throw new Error("Falta una coma entre elementos.");
+          }
+          take("]");
+          return array;
+        }
+        take();
+        if (token.type === "string" || token.type === "number") return token.value;
+        if (token.type === "identifier" && token.value === "true") return true;
+        if (token.type === "identifier" && token.value === "false") return false;
+        if (token.type === "identifier" && token.value === "null") return null;
+        throw new Error(`El valor “${token.value}” no es compatible con el editor.`);
+      }
+
+      const parsed = parseValue();
+      if (!parsed || Array.isArray(parsed) || typeof parsed !== "object") throw new Error("CONFIG debe contener un objeto.");
+      return parsed;
+    }
+
+    function labelFor(key) {
+      return FIELD_NAMES[key] || key.replaceAll("_", " ").toLowerCase().replace(/(^|\s)\S/g, letter => letter.toUpperCase());
+    }
+
+    function valueAt(path) {
+      return path.reduce((value, key) => value[key], config);
+    }
+
+    function setValue(path, value) {
+      const parent = path.slice(0, -1).reduce((node, key) => node[key], config);
+      parent[path[path.length - 1]] = value;
+      markDirty();
+    }
+
+    function markDirty() {
+      dirty = true;
+      updateStatus(`${sourceName} · cambios sin guardar`);
+    }
+
+    function updateStatus(message) {
+      fileState.textContent = message;
+    }
+
+    function makeField(key, value, path) {
+      const wrapper = document.createElement("div");
+      const longText = typeof value === "string" && (value.length > 115 || /DESCRIP|DETALLE|MISION|VISION|INTRO|COMPROMISO|TEXTO|LEMA|MENSAJE|VALOR_/i.test(key));
+      const isHtml = key === "DETALLE";
+      wrapper.className = `field${longText ? " field-wide" : ""}`;
+
+      if (typeof value === "boolean") {
+        const label = document.createElement("label");
+        label.className = "boolean-control";
+        const input = document.createElement("input");
+        input.type = "checkbox";
+        input.checked = value;
+        input.addEventListener("change", () => setValue(path, input.checked));
+        label.append(input, document.createTextNode(labelFor(key)));
+        wrapper.append(label);
+        return wrapper;
+      }
+
+      const label = document.createElement("label");
+      label.className = "field-label";
+      label.append(document.createTextNode(labelFor(key)));
+      const keyHint = document.createElement("span");
+      keyHint.className = "field-key";
+      keyHint.textContent = key;
+      label.append(keyHint);
+
+      if (typeof value === "string" && /^(?:#(?:[0-9a-f]{3}){1,2})$/i.test(value)) {
+        const controls = document.createElement("div");
+        controls.className = "color-controls";
+        const color = document.createElement("input");
+        color.type = "color";
+        color.value = value;
+        color.setAttribute("aria-label", `${labelFor(key)} selector de color`);
+        const text = document.createElement("input");
+        text.type = "text";
+        text.value = value;
+        text.spellcheck = false;
+        text.setAttribute("aria-label", `${labelFor(key)} valor hexadecimal`);
+        color.addEventListener("input", () => { text.value = color.value; setValue(path, color.value); });
+        text.addEventListener("input", () => {
+          if (/^(?:#(?:[0-9a-f]{3}){1,2})$/i.test(text.value)) color.value = text.value;
+          setValue(path, text.value);
+        });
+        controls.append(color, text);
+        wrapper.append(label, controls);
+        return wrapper;
+      }
+
+      let input;
+      if (longText) {
+        input = document.createElement("textarea");
+        if (isHtml) input.classList.add("code-value");
+      } else {
+        input = document.createElement("input");
+        input.type = typeof value === "number" ? "number" : /URL|LOGO|IMAGEN/i.test(key) ? "url" : "text";
+        if (typeof value === "number") input.step = "any";
+      }
+      input.value = value ?? "";
+      input.addEventListener("input", () => setValue(path, input.type === "number" ? Number(input.value) : input.value));
+      wrapper.append(label, input);
+      if (isHtml) {
+        const note = document.createElement("p");
+        note.className = "muted-note";
+        note.textContent = "Admite etiquetas HTML, por ejemplo <li> y <strong>.";
+        wrapper.append(note);
+      }
+      return wrapper;
+    }
+
+    function emptyItemFor(key, array) {
+      if (key === "VALORES") return ["", ""];
+      if (key === "OPCIONES") {
+        const ids = array.filter(item => item && typeof item.ID === "number").map(item => item.ID);
+        return { ID: ids.length ? Math.max(...ids) + 1 : 0, NOMBRE: "", ARCHIVO: "" };
+      }
+      const example = array[0];
+      if (typeof example === "string") return "";
+      if (typeof example === "number") return 0;
+      if (typeof example === "boolean") return false;
+      if (Array.isArray(example)) return example.map(() => "");
+      if (example && typeof example === "object") {
+        return Object.fromEntries(Object.entries(example).map(([field, fieldValue]) => [field, field === "ID" && typeof fieldValue === "number" ? Math.max(-1, ...array.map(item => Number(item?.ID) || 0)) + 1 : typeof fieldValue === "boolean" ? false : typeof fieldValue === "number" ? 0 : ""]));
+      }
+      return "";
+    }
+
+    function itemHeading(item, index) {
+      if (Array.isArray(item) && item[0]) return String(item[0]);
+      if (item && typeof item === "object") return item.NOMBRE || item.TITULO || item.ID || `Elemento ${index + 1}`;
+      return typeof item === "string" && item ? item : `Elemento ${index + 1}`;
+    }
+
+    function makeArray(key, array, path) {
+      const block = document.createElement("div");
+      block.className = "field-wide";
+      const heading = document.createElement("div");
+      heading.className = "nested-label";
+      heading.textContent = labelFor(key);
+      const list = document.createElement("div");
+      list.className = "nested-list";
+
+      array.forEach((item, index) => {
+        const itemPath = [...path, index];
+        const row = document.createElement("div");
+        row.className = "array-item";
+        const content = document.createElement("div");
+        content.className = "array-item-content";
+        if (item && typeof item === "object" && !Array.isArray(item)) {
+          const nested = document.createElement("details");
+          nested.className = "nested";
+          nested.open = true;
+          const summary = document.createElement("summary");
+          summary.textContent = itemHeading(item, index);
+          nested.append(summary, renderObject(item, itemPath));
+          content.append(nested);
+        } else if (Array.isArray(item)) {
+          const innerFields = document.createElement("div");
+          innerFields.className = "fields";
+          item.forEach((inner, innerIndex) => innerFields.append(makeField(innerIndex === 0 ? "Nombre" : "Descripción", inner, [...itemPath, innerIndex])));
+          content.append(innerFields);
+        } else {
+          const field = makeField(`${key} ${index + 1}`, item, itemPath);
+          const label = field.querySelector(".field-label");
+          if (label) label.firstChild.textContent = `${labelFor(key)} ${index + 1}`;
+          content.append(field);
+        }
+        const remove = document.createElement("button");
+        remove.type = "button";
+        remove.className = "remove-button";
+        remove.textContent = "×";
+        remove.title = `Eliminar ${itemHeading(item, index)}`;
+        remove.setAttribute("aria-label", remove.title);
+        remove.addEventListener("click", () => {
+          const target = valueAt(path);
+          target.splice(index, 1);
+          markDirty();
+          render();
+        });
+        row.append(content, remove);
+        list.append(row);
+      });
+
+      const tools = document.createElement("div");
+      tools.className = "array-tools";
+      const add = document.createElement("button");
+      add.type = "button";
+      add.className = "button button-small";
+      add.textContent = "+ Agregar elemento";
+      add.addEventListener("click", () => {
+        valueAt(path).push(emptyItemFor(key, valueAt(path)));
+        markDirty();
+        render();
+        const openSections = [...sections.querySelectorAll("details")].filter(details => details.open);
+        openSections.forEach(details => { details.open = true; });
+      });
+      tools.append(add);
+      block.append(heading, list, tools);
+      return block;
+    }
+
+    function renderObject(object, path) {
+      const body = document.createElement("div");
+      body.className = "section-body";
+      const fields = document.createElement("div");
+      fields.className = "fields";
+      for (const [key, value] of Object.entries(object)) {
+        const currentPath = [...path, key];
+        if (Array.isArray(value)) {
+          fields.append(makeArray(key, value, currentPath));
+        } else if (value && typeof value === "object") {
+          const nested = document.createElement("details");
+          nested.className = "nested field-wide";
+          const summary = document.createElement("summary");
+          summary.textContent = labelFor(key);
+          nested.append(summary, renderObject(value, currentPath));
+          fields.append(nested);
+        } else {
+          fields.append(makeField(key, value, currentPath));
+        }
+      }
+      body.append(fields);
+      return body;
+    }
+
+    function render() {
+      sections.replaceChildren();
+      for (const [key, value] of Object.entries(config)) {
+        if (!value || typeof value !== "object" || Array.isArray(value)) continue;
+        const section = document.createElement("details");
+        section.className = "section";
+        section.open = true;
+        const summary = document.createElement("summary");
+        summary.append(document.createTextNode(SECTION_NAMES[key] || labelFor(key)));
+        const count = document.createElement("span");
+        count.className = "section-count";
+        count.textContent = `${Object.keys(value).length} campos`;
+        summary.append(count);
+        section.append(summary, renderObject(value, [key]));
+        sections.append(section);
+      }
+      emptyState.hidden = true;
+      sections.hidden = false;
+      saveButton.disabled = false;
+      downloadButton.disabled = false;
+    }
+
+    function loadSource(source, name) {
+      const parsed = parseConfig(source);
+      if (!parsed.MARCA || !parsed.TEXTOS) throw new Error("El archivo no parece ser el config.js de este sitio.");
+      config = parsed;
+      sourceName = name || "config.js";
+      dirty = false;
+      render();
+      updateStatus(`${sourceName} · listo para editar`);
+    }
+
+    function serializeConfig() {
+      const output = ["// Configuración de marca blanca.", "// Editar este archivo para personalizar la plantilla.", "const CONFIG = {"];
+      const entries = Object.entries(config);
+      entries.forEach(([key, value], index) => {
+        output.push(`  ${JSON.stringify(key)}: ${JSON.stringify(value, null, 2).split("\n").map((line, lineIndex) => lineIndex === 0 ? line : `  ${line}`).join("\n")}${index < entries.length - 1 ? "," : ""}`);
+      });
+      output.push("};", "");
+      return output.join("\n");
+    }
+
+    function downloadConfig() {
+      const blob = new Blob([serializeConfig()], { type: "text/javascript;charset=utf-8" });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement("a");
+      link.href = url;
+      link.download = "config.js";
+      link.click();
+      URL.revokeObjectURL(url);
+      dirty = false;
+      updateStatus("config.js · copia descargada");
+    }
+
+    async function saveConfig() {
+      if (typeof window.showSaveFilePicker !== "function") { downloadConfig(); return; }
+      try {
+        const handle = await window.showSaveFilePicker({
+          suggestedName: "config.js",
+          types: [{ description: "Archivo JavaScript", accept: { "text/javascript": [".js"] } }]
+        });
+        const writable = await handle.createWritable();
+        await writable.write(serializeConfig());
+        await writable.close();
+        dirty = false;
+        updateStatus(`${handle.name} · guardado`);
+      } catch (error) {
+        if (error.name !== "AbortError") updateStatus(`No se pudo guardar: ${error.message}`);
+      }
+    }
+
+    openButton.addEventListener("click", () => fileInput.click());
+    fileInput.addEventListener("change", async () => {
+      const file = fileInput.files?.[0];
+      if (!file) return;
+      if (dirty && !window.confirm("Hay cambios sin guardar. ¿Descartar y abrir otro archivo?")) {
+        fileInput.value = "";
+        return;
+      }
+      try {
+        loadSource(await file.text(), file.name);
+      } catch (error) {
+        updateStatus(`No se pudo abrir el archivo: ${error.message}`);
+      }
+      fileInput.value = "";
+    });
+    saveButton.addEventListener("click", saveConfig);
+    downloadButton.addEventListener("click", downloadConfig);
+    window.addEventListener("beforeunload", event => {
+      if (dirty) { event.preventDefault(); event.returnValue = ""; }
+    });
+
+    if (location.protocol !== "file:") {
+      fetch("./js/config.js").then(response => {
+        if (!response.ok) throw new Error("No se encontró js/config.js");
+        return response.text();
+      }).then(source => loadSource(source, "js/config.js")).catch(() => {});
+    }
+  </script>
+</body>
+</html>
