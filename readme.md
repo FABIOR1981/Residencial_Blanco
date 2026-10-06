@@ -2,6 +2,10 @@
 
 Sitio web estático adaptable para una institución o residencial. La identidad, los textos, los recursos visuales, el contacto y Cloudinary se administran desde un único archivo de configuración.
 
+## Documentación
+
+El manual de usuario está en [documentacion-central](https://github.com/FABIOR1981/documentacion-central/tree/main/Residencial_Blanco/documentacion) ([PDF](https://github.com/FABIOR1981/documentacion-central/blob/main/Residencial_Blanco/documentacion/MANUAL_USUARIO.pdf)). También se puede consultar desde la bitácora de proyectos.
+
 ## Personalización
 
 Editar [`js/config.js`](js/config.js). No es necesario modificar `index.html`, `js/main.js` ni `css/styles.css` para cambiar la marca.
